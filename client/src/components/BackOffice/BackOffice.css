@@ -1,0 +1,67 @@
+.admin-nav {
+  background-color: rgba(71, 71, 196, 0.87);
+  width: 100%;
+  grid-column: span 3;
+}
+
+.admin-nav h1 {
+  font-size: calc(var(--font-size-ref) * 1.5);
+  text-align: center;
+}
+
+.admin-nav ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-nav li {
+  list-style: none;
+}
+
+.add-product-container {
+  margin: calc(var(--spacing-ref) * 2);
+  padding: calc(var(--spacing-ref) * 2);
+  box-shadow: 1px 2px 5px 2px #00000029;
+  border-radius: var(--border-ref);
+  justify-self: center;
+  width: 50%;
+}
+
+.edit-product-CTA {
+  justify-self: center;
+  text-align: center;
+}
+
+.edit-product-CTA a {
+  color: white;
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.backOffice-products {
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.preview-img {
+  width: 30%;
+}
+
+.backOffice-products h1 {
+  padding: var(--spacing-ref);
+  grid-column: span 3;
+}
+
+.backOffice-products-cards {
+  width: 80%;
+}
+
+.backOffice-products-cards img {
+  width: 100%;
+  border-radius: var(--border-ref);
+}

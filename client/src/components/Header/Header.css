@@ -1,0 +1,40 @@
+@import url("@src/variables.css");
+
+.header {
+  text-align: center;
+  background-color: var(--secondColor);
+}
+
+.header h1 {
+  font-size: calc(var(--font-size-ref) * 1);
+}
+
+.header p {
+  font-size: calc(var(--font-size-ref) * 0.8);
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  bottom: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease, bottom 0.3s ease;
+  position: fixed;
+  padding: var(--spacing-ref);
+}
+
+.main-nav-visible {
+  bottom: 0;
+  transform: translateX(0);
+}
+
+.main-nav-hidden {
+  bottom: 0;
+  transform: translateX(-100%);
+}
+
+.nav-bar {
+  background-color: var(--bckgSecondColor) !important;
+  border-radius: 12px;
+}

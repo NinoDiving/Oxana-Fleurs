@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Alpino-Regular";
+  src: local("Alpino-Regular"), url("/fonts/Alpino/Alpino-Regular.woff2")
+    format("woff2"), url("/fonts/alpino/Alpino-Regular.woff") format("woff"),
+    url("/fonts/alpino/Alpino-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sentient-Regular";
+  src: local("Sentient-Regular"), url("/fonts/Sentient/Sentient-Regular.woff"),
+    url("/fonts/Sentient/Sentient-Regular.woff") format("woff"),
+    url("/fonts/Sentient/Sentient-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  --title-font-h1: "Sentient-Regular";
+  --textFont: "Alpino-Regular";
+
+  --font-size-ref: 1rem;
+
+  --font-weight-S: 400;
+
+  --bckgColor: #f8f9fa;
+  --bckgColor-opacity: #f8f9facb;
+  --bckgSecondColor: #f3eeea;
+  --bckgSecondColor-opacity: #fffff35d;
+  --mainColor: #fb7a3f;
+  --variantMainColor: #f59d3fe8;
+  --secondColor: rgb(244, 217, 206);
+  --thirdColor: #f74aa1;
+  --thirdColor-opacity: #f74aa1c5;
+  --gradientColor: linear-gradient(
+    90deg,
+    rgba(247, 74, 161, 1) 13%,
+    rgba(245, 158, 63, 1) 100%
+  );
+  --shadow: #c8c8c8;
+  --aliceBlueColor: #f0f8ff;
+  --errorColor: red;
+  --color-label: rgba(0, 0, 0, 0.87);
+  --border-color-input-focus: #3399ff;
+  --errorColor: rgba(255, 0, 0, 0.753);
+  --color-input: white;
+  --color-input-black: black;
+  --bckgColor-input: white;
+  --bckgColorCTA: black;
+  --light: white;
+  --dark: black;
+
+  --border-ref: 8px;
+  --border-XL: calc(var(--border-ref) * 2);
+  --border-input: 1px solid #dae2ed;
+  --border-weight: 1px;
+
+  --spacing-ref: 1rem;
+  --spacing-S: calc(var(--spacing-ref) * 0.5);
+
+  --font-size-XS: calc(var(--spacing-ref) * 0.8);
+
+  --spacing-letter-ref: 1px;
+
+  --padding-input: 8px 12px;
+  --margin-input-form: 0px 0px 6.4px;
+
+  --box-shadow-input-focus: 0 0 0 3px #80bfff;
+  --box-shadow-input: 0 2px 2px #f3f6f9;
+  --box-shadow-soft: 0px 2px 7px 1px #00000033;
+
+  --width-input-form: 15rem;
+  --width-label-text: 40ch;
+  --height-input-form: 2.5rem;
+}

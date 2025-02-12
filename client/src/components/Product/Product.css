@@ -1,0 +1,28 @@
+.product-container {
+  text-align: center;
+}
+
+.product-container p {
+  text-align: left;
+  padding-bottom: var(--spacing-ref);
+}
+
+.main-picture-product {
+  padding: calc(var(--spacing-ref) * 1);
+  display: flex;
+}
+
+.main-picture-product img {
+  width: 70%;
+  padding-left: var(--spacing-ref);
+}
+
+.small-picture-product img {
+  width: 100%;
+  padding-right: var(--spacing-ref);
+}
+
+.description-product {
+  width: 40ch;
+  margin: auto;
+}

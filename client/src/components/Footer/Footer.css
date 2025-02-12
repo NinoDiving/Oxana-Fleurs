@@ -1,0 +1,11 @@
+.main-footer {
+  background-color: beige;
+  margin-top: var(--spacing-ref);
+  text-align: center;
+}
+
+.social-link {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-ref);
+}

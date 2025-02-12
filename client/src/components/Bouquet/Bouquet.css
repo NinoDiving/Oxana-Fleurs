@@ -1,0 +1,60 @@
+@import url("@src/variables.css");
+
+.banner-shop-bouquet {
+  padding-top: calc(var(--spacing-ref) * 6);
+  width: 100%;
+  text-align: center;
+}
+
+.banner-shop-bouquet img {
+  border-radius: calc(var(--border-ref) * 2);
+  margin: calc(var(--spacing-ref) * 1.5);
+}
+
+.flowers-container {
+  padding: var(--spacing-ref);
+  padding-top: calc(var(--spacing-ref) * 6);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: var(--spacing-ref);
+}
+
+.flowers-container h1 {
+  grid-column: span 2;
+}
+
+.cards-container {
+  border-top: 1px solid rgba(39, 37, 37, 0.377);
+  justify-items: center;
+  padding-top: var(--spacing-ref);
+}
+
+.cards-container h3 {
+  text-align: center;
+  width: 15ch;
+  padding-bottom: calc(var(--spacing-ref) * 0.5);
+  font-size: calc(var(--font-size-ref) * 1.5);
+}
+
+.cards-container p {
+  text-align: left;
+  padding-bottom: calc(var(--spacing-ref) * 0.5);
+  letter-spacing: var(--spacing-letter-ref);
+  width: 30ch;
+}
+
+.cards-container img {
+  border-radius: var(--border-ref);
+  width: 80%;
+}
+
+.mySwiper2 {
+  text-align: center;
+  width: 100%;
+}
+
+.mySwiper2 img {
+  width: 100%;
+  border-radius: var(--border-ref);
+}

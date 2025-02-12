@@ -1,0 +1,17 @@
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  margin: calc(var(--spacing-ref) * 1.2);
+}
+#transition-modal-title {
+  text-align: center;
+}
+
+#password {
+  margin-bottom: calc(var(--spacing-ref) * 1.2);
+}
+
+.sign-up-container {
+  justify-self: center;
+}

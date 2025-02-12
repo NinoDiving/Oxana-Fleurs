@@ -83,8 +83,6 @@ const edit: RequestHandler = async (req, res, next) => {
 const authenticateUser: RequestHandler = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    console.log("userData:", req.body);
-
     const user = await userRepository.getUserEmailWithIsAdmin({ email });
 
     if (!user) {

@@ -24,6 +24,7 @@ export default function useLogin() {
       }
 
       navigate("/");
+      setIsAuthenticated(true);
     } catch (err) {
       setError("Mot de passe ou adresse e-mail incorrect");
     }

@@ -76,11 +76,8 @@ class userRepository {
       `,
       [user.email],
     );
-    console.log("Email envoyé à la requête SQL :", user.email);
-    console.log(result);
 
     if (!result[0]) {
-      console.log("Erreur pas de résultat");
     }
     return result[0];
   }

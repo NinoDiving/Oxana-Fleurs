@@ -1,4 +1,4 @@
-import useContact from "../../services/Form/UseContact";
+import useContact from "../../hooks/Form/UseContact";
 import { StyledButton } from "../../style/StyledButton";
 import { StyledInput } from "../../style/StyledInput";
 

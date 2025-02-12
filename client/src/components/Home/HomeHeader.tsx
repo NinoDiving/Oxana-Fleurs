@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/Auth/Auth";
 import { StyledButton } from "../../style/StyledButton";
 import { StyledDatePicker } from "../../style/StyledDate";
 import { StyledInput } from "../../style/StyledInput";
@@ -7,7 +8,7 @@ import { StyledInput } from "../../style/StyledInput";
 export default function HomeHeader() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [zipCode, setZipCode] = useState<string>("");
-
+  const { user } = useAuth();
   const onChangeZipCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -27,6 +28,7 @@ export default function HomeHeader() {
           value={zipCode}
           onChange={onChangeZipCode}
         />
+        <h2>{user?.lastname}</h2>
         <label htmlFor="delivery-date">Date de livraison</label>
         <StyledDatePicker
           id="delivery-date"

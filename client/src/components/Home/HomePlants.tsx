@@ -15,7 +15,7 @@ export default function HomePlants() {
       <article className="container-plants">
         <h2>Nos plantes du moment</h2>
         {topProductPlants.map((plants) => (
-          <section key={plants.id} className="cards-container">
+          <section key={plants.product_id} className="cards-container">
             <img
               src={`${import.meta.env.VITE_URL}${plants.img_path}`}
               alt={plants.name}

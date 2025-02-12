@@ -9,7 +9,6 @@ export default function Login() {
     handleChangePassword,
     handleLogin,
     error,
-    isAuthenticated,
   } = useLogin();
   return (
     <main className="login-container">

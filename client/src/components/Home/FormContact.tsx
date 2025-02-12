@@ -18,11 +18,11 @@ export default function FormContact() {
           onChange={handleChange}
           value={formData.name}
         />
-        <label htmlFor="email">Votre adresse-email</label>
+        <label htmlFor="email-contact">Votre adresse-email</label>
         <StyledInput
           type="email"
-          name="email"
-          id="email"
+          name="email-contact"
+          id="email-contact"
           value={formData.email}
           placeholder="Entrez votre adresse-email"
           onChange={handleChange}

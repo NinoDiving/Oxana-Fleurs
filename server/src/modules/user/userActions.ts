@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import Auth from "../../services/Auth/Auth";
 import userRepository from "./userRepository";
 
 // Import access to data
@@ -40,10 +41,6 @@ const read: RequestHandler = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
   try {
-    if (!req.file) {
-      res.status(400).json({ message: "L'image est obligatoire" });
-    }
-
     const new_user = {
       lastname: req.body.lastname,
       firstname: req.body.firstname,
@@ -64,15 +61,16 @@ const add: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const update_user = {
+      id: req.body.id,
       lastname: req.body.lastname,
       firstname: req.body.firstname,
       email: req.body.email,
       password: req.body.password,
     };
 
-    const updateHotel = await userRepository.update(update_user);
+    const updateUser = await userRepository.update(update_user);
 
-    if (!updateHotel) {
+    if (!updateUser) {
       res.sendStatus(404);
     } else {
       res.sendStatus(204);
@@ -82,4 +80,43 @@ const edit: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add, edit };
+const authenticateUser: RequestHandler = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const user = await userRepository.getUserEmailWithIsAdmin({ email });
+
+    if (!user) {
+      res.status(401).json({ message: "Email incorrect." });
+    }
+
+    const isPasswordMatch = await Auth.matchPassword(password, user.password);
+
+    if (!isPasswordMatch) {
+      res.status(401).json({ message: "Mot de passe incorrect." });
+    }
+
+    req.body.password = null;
+
+    // const token = authServices.generateToken({
+    //   id: user.id,
+    //   email: user.email,
+    //   role: user.role,
+    // });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   maxAge: 3600000,
+    //   sameSite: "none",
+    // });
+
+    res.status(200).json({
+      message: "Connexion réussie",
+      //   role: user.role,
+      //   token,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { browse, read, add, edit, authenticateUser };

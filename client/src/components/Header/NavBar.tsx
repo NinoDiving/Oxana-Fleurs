@@ -61,7 +61,7 @@ export default function NavBar() {
         <BottomNavigationAction
           label="Profile"
           icon={<AccountCircleIcon />}
-          href="/panier"
+          href="/login"
         />
       </BottomNavigation>
     </header>

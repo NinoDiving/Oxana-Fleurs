@@ -12,7 +12,7 @@ import TopProductsActions from "./modules/TopProducts/TopProductsActions";
 import userActions from "./modules/user/userActions";
 // Define item-related routes
 import { sendEmail } from "./services/emailSender";
-
+router.post("/login", userActions.authenticateUser);
 router.post("/send-email", sendEmail);
 router.get("/api/products", productsActions.browse);
 router.get("/api/products/:id", productsActions.read);

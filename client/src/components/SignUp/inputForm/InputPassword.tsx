@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { StyledInput } from "../../../style/StyledInput";
 import type { PasswordValidation } from "../../../types/signup/PasswordCheck";
 

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 export default function useLogin() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -44,7 +43,6 @@ export default function useLogin() {
         secure: true,
         sameSite: "lax",
       });
-      setIsAuthenticated(true);
     } catch (err) {
       setError("Mot de passe ou adresse e-mail incorrect");
     }
@@ -65,7 +63,6 @@ export default function useLogin() {
     handleChangeEmail,
     handleLogin,
     handleLogout,
-    isAuthenticated,
     error,
   };
 }

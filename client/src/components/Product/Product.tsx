@@ -1,5 +1,6 @@
 import "./Product.css";
 import { useEffect, useState } from "react";
+import { useSaveToCart } from "../../services/Context/CartContext";
 import FetchProduct from "../../services/Product/FetchProduct";
 import { StyledButton } from "../../style/StyledButton";
 
@@ -7,7 +8,7 @@ export default function Product() {
   const { product } = FetchProduct();
   const baseUrl = import.meta.env.VITE_URL;
   const [mainImage, setMainImage] = useState<string | null>(null);
-
+  const { addToCart, saveToCart, isProductSaved } = useSaveToCart();
   useEffect(() => {
     if (product?.img_path) {
       setMainImage(`${baseUrl}/${product.img_path}`);
@@ -19,6 +20,14 @@ export default function Product() {
     "/img/fleurs2.webp",
     "/img/fleurs3.webp",
   ];
+  const isProductInCart = isProductSaved(product?.id ?? 0);
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product);
+    }
+  };
+  console.log(saveToCart);
 
   return (
     <main className="product-container">
@@ -47,7 +56,9 @@ export default function Product() {
         <p>Prix : {product?.price}€</p>
       </section>
 
-      <StyledButton>Commandez</StyledButton>
+      <StyledButton onClick={handleAddToCart}>
+        {isProductInCart ? "Produit ajouté" : "Commandez"}
+      </StyledButton>
     </main>
   );
 }

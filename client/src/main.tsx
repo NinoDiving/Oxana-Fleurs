@@ -7,6 +7,7 @@ import BackOfficePlantes from "./components/BackOffice/BackOfficePlants/BackOffi
 import BackOfficeHome from "./components/BackOffice/Home/BackOfficeHome.tsx";
 import TopProducts from "./components/BackOffice/TopProducts/TopProducts.tsx";
 import Bouquet from "./components/Bouquet/Bouquet.tsx";
+import Cart from "./components/Cart/Cart.tsx";
 import Home from "./components/Home/Home.tsx";
 import Plants from "./components/Plants/Plants.tsx";
 import Product from "./components/Product/Product.tsx";
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product />,
+      },
+      {
+        path: "/panier",
+        element: <Cart />,
       },
       {
         path: "/login",

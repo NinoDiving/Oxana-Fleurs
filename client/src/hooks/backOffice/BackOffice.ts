@@ -82,6 +82,7 @@ export default function useBackOffice() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ product_id }),
+          credentials: "include",
         },
       );
 

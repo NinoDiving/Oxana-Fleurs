@@ -12,8 +12,7 @@ export default function UserProfile() {
         <button onClick={handleLogout} type="button">
           Me déconnecter
         </button>
-        <h1>Bienvenue {user?.lastname}</h1>
-        <Login />
+        {user?.lastname ? <h1>Bienvenue {user?.firstname}</h1> : <Login />}
       </article>
     </main>
   );

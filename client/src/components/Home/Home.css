@@ -67,7 +67,7 @@
 }
 
 .home-plants-banniere {
-  margin-top: calc(var(--spacing-ref) * 2);
+  margin-top: calc(var(--spacing-ref) * 5);
   background-color: var(--bckgSecondColor);
   height: 40vh;
   display: flex;
@@ -196,9 +196,69 @@
   display: flex;
   flex-direction: column;
   padding: calc(var(--spacing-ref) * 2);
-  gap: var(--spacing-ref);
+}
+
+.form-contact button {
+  align-self: center;
 }
 
 #message {
   padding: 3rem;
+}
+
+#name {
+  margin-bottom: calc(var(--spacing-ref) * 1);
+}
+
+#email-contact {
+  margin-bottom: calc(var(--spacing-ref) * 1);
+}
+
+@media screen and (min-width: 1000px) {
+  .bouquets {
+    width: 100%;
+  }
+  .mySwiper {
+    width: 100%;
+    padding: calc(var(--spacing-ref) * 2);
+  }
+
+  .home-plants-banniere {
+    align-items: center;
+  }
+
+  .home-plants-banniere button {
+    align-items: center;
+    align-self: center;
+  }
+
+  .container-plants {
+    justify-self: center;
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .container-plants h2 {
+    grid-column: span 3;
+  }
+
+  .container-plants h3 {
+    font-size: calc(var(--font-size-ref) * 1.1);
+  }
+
+  .be-member {
+    text-align: center;
+  }
+
+  .ourStory {
+    width: 50%;
+    justify-self: center;
+  }
+
+  #name,
+  #email-contact,
+  #message {
+    width: 30vw;
+  }
 }

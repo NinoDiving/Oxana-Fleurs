@@ -11,6 +11,7 @@ import { upload } from "../middleware/uploadImage";
 import verifyToken from "../middleware/verifyToken";
 import productsActions from "./modules/Products/productsActions";
 import TopProductsActions from "./modules/TopProducts/TopProductsActions";
+import purchaseAction from "./modules/purchase/purchaseAction";
 import userActions from "./modules/user/userActions";
 // Define item-related routes
 import { sendEmail } from "./services/emailSender";
@@ -49,7 +50,7 @@ router.put(
 );
 router.get("/api/top-products", TopProductsActions.browse);
 router.get("/api/top-products/:id", TopProductsActions.read);
-router.post("/api/top-products", adminAuthorization, TopProductsActions.add);
+router.post("/api/top-products", TopProductsActions.add);
 router.put(
   "/api/top-products/:id",
   adminAuthorization,
@@ -59,7 +60,7 @@ router.get("/api/user", adminAuthorization, userActions.browse);
 router.get("/api/user/:id", userActions.read);
 router.post("/api/user", userActions.add);
 router.put("/api/user/:id", userActions.edit);
-
+router.post("/cart", purchaseAction.add);
 /* ************************************************************************* */
 
 export default router;

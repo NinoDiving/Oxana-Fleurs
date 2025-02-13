@@ -6,19 +6,32 @@ import FetchDataFlowers from "../../services/FetchDataFlowers";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AllBouquets from "./AllBouquet";
 export default function Bouquet() {
   const { flowers } = FetchDataFlowers();
-  const splitFlowers = flowers.splice(0, 4);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
-      <section className="banner-shop-bouquet">
+      <main className="catalogue-product">
         <h1>Nos bouquets du moment </h1>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          slidesPerView={2}
+          slidesPerView={isDesktop ? 5 : 2}
           initialSlide={2}
           loop={true}
           autoplay={{
@@ -29,7 +42,7 @@ export default function Bouquet() {
           modules={[Autoplay, Navigation]}
           className="mySwiper2"
         >
-          {splitFlowers.map((flower) => (
+          {flowers.map((flower) => (
             <article
               key={flower.id}
               className="bouquet-slider"
@@ -48,7 +61,7 @@ export default function Bouquet() {
           ))}
         </Swiper>
         <AllBouquets />
-      </section>
+      </main>
     </>
   );
 }

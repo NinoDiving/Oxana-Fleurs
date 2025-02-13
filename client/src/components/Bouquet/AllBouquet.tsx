@@ -1,4 +1,3 @@
-import useObserver from "../../hooks/Observer/useObserver";
 import { useSaveToCart } from "../../services/Context/CartContext";
 import FetchDataFlowers from "../../services/FetchDataFlowers";
 import { StyledButton } from "../../style/StyledButton";
@@ -13,8 +12,6 @@ export default function AllBouquets() {
   const handleAddtoCart = (flowers: ProductProps) => {
     addToCart(flowers);
   };
-
-  const { isVisible, elementRef } = useObserver({ rootMargin: "0px" });
 
   return (
     <article className="flowers-container">

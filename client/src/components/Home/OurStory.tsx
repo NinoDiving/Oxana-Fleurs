@@ -4,10 +4,10 @@ export default function OurStory() {
       <h1>Notre histoire</h1>
       <div className="container-contentStory">
         <section className="our-storyContent1">
-          <img src="./img/magasin.jpg" alt="" />
+          <img src="./img/magasin.png" alt="" />
           <p>
             Dirigée par le couple passionné Jean-Luc et Oxana Jautee, cette
-            boutique propose
+            boutique propose{" "}
             <strong>
               une vaste sélection de fleurs et de compositions florales{" "}
             </strong>

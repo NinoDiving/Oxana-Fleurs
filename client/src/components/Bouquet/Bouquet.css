@@ -67,6 +67,10 @@
     margin: calc(var(--spacing-ref) * 2);
   }
 
+  .cards-container p {
+    width: 40ch;
+  }
+
   .flowers-container {
     justify-self: center;
     display: grid;

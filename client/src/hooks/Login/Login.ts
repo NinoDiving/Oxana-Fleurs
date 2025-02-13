@@ -20,6 +20,7 @@ export default function useLogin() {
     }
   };
   const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError(null);
 
     try {
@@ -32,6 +33,10 @@ export default function useLogin() {
 
       if (!response.ok) {
         throw new Error("Email ou mot de passe incorrect");
+      }
+
+      if (response.ok) {
+        window.location.reload();
       }
 
       const data = await response.json();

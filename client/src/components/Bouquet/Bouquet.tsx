@@ -8,6 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import HomeHeader from "../Home/HomeHeader";
 import AllBouquets from "./AllBouquet";
 export default function Bouquet() {
   const { flowers } = FetchDataFlowers();
@@ -15,7 +16,7 @@ export default function Bouquet() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1000);
+      setIsDesktop(window.innerWidth <= 1000);
     };
 
     window.addEventListener("resize", handleResize);
@@ -26,12 +27,13 @@ export default function Bouquet() {
 
   return (
     <>
+      <HomeHeader />
       <main className="catalogue-product">
         <h1>Nos bouquets du moment </h1>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          slidesPerView={isDesktop ? 5 : 2}
+          slidesPerView={isDesktop ? 2 : 5}
           initialSlide={2}
           loop={true}
           autoplay={{

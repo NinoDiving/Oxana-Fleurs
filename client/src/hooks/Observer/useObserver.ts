@@ -1,22 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-const useIntersectionObserver = (
-  options: IntersectionObserverInit = {},
-  threshold = 0.5,
-) => {
+const useObserver = (options: IntersectionObserverInit) => {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        ...options,
-        threshold,
-      },
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, options);
 
     if (elementRef.current) {
       observer.observe(elementRef.current);
@@ -27,9 +18,9 @@ const useIntersectionObserver = (
         observer.unobserve(elementRef.current);
       }
     };
-  }, [options, threshold]);
+  }, [options]);
 
   return { isVisible, elementRef };
 };
 
-export default useIntersectionObserver;
+export default useObserver;

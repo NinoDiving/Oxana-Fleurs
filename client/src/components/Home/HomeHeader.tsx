@@ -34,9 +34,8 @@ export default function HomeHeader() {
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
         />
-        <StyledButton>
-          <Link to="/bouquets">Trouvez un bouquet</Link>
-        </StyledButton>
+
+        <Link to="/bouquets">Trouvez un bouquet</Link>
       </section>
     </article>
   );

@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FetchTopPlants from "../../services/Product/FetchTopPlants";
+import HomeHeader from "../Home/HomeHeader";
 import AllPlants from "./AllPlants";
 
 export default function Plants() {
@@ -17,7 +18,7 @@ export default function Plants() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1000);
+      setIsDesktop(window.innerWidth <= 1000);
     };
 
     window.addEventListener("resize", handleResize);
@@ -27,12 +28,13 @@ export default function Plants() {
   }, []);
   return (
     <>
+      <HomeHeader />
       <section className="catalogue-product">
         <h1>Nos Plantes de saison </h1>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          slidesPerView={isDesktop ? 5 : 2}
+          slidesPerView={isDesktop ? 2 : 5}
           initialSlide={2}
           loop={true}
           autoplay={{

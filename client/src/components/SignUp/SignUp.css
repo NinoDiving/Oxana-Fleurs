@@ -15,3 +15,11 @@ fieldset {
 .sign-up-container {
   justify-self: center;
 }
+
+.error {
+  color: rgba(255, 0, 0, 0.63);
+}
+
+.error::before {
+  content: "❌";
+}

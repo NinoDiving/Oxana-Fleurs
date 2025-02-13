@@ -8,7 +8,7 @@ export default function Product() {
   const { product } = FetchProduct();
   const baseUrl = import.meta.env.VITE_URL;
   const [mainImage, setMainImage] = useState<string | null>(null);
-  const { addToCart, saveToCart, isProductSaved } = useSaveToCart();
+  const { addToCart, isProductSaved } = useSaveToCart();
   useEffect(() => {
     if (product?.img_path) {
       setMainImage(`${baseUrl}/${product.img_path}`);
@@ -27,34 +27,34 @@ export default function Product() {
       addToCart(product);
     }
   };
-  console.log(saveToCart);
 
   return (
     <main className="product-container">
       <h1>{product?.name}</h1>
-      <article className="main-picture-product">
-        {mainImage ? (
-          <img src={mainImage} alt={product?.name} />
-        ) : (
-          <p>Chargement de l'image...</p>
-        )}
-        <div className="small-picture-product">
-          {smallImages.map((image) => (
-            <img
-              onKeyDown={() => setMainImage(image)}
-              key={image}
-              src={image}
-              alt=""
-              onClick={() => setMainImage(image)}
-            />
-          ))}
-        </div>
-      </article>
-
-      <section className="description-product">
-        <p>{product?.description}</p>
-        <p>Prix : {product?.price}€</p>
-      </section>
+      <div className="wrapper-picture">
+        <article className="main-picture-product">
+          {mainImage ? (
+            <img src={mainImage} alt={product?.name} />
+          ) : (
+            <p>Chargement de l'image...</p>
+          )}
+          <div className="small-picture-product">
+            {smallImages.map((image) => (
+              <img
+                onKeyDown={() => setMainImage(image)}
+                key={image}
+                src={image}
+                alt=""
+                onClick={() => setMainImage(image)}
+              />
+            ))}
+          </div>
+        </article>
+        <section className="description-product">
+          <p>{product?.description}</p>
+          <p>Prix : {product?.price}€</p>
+        </section>
+      </div>
 
       <StyledButton onClick={handleAddToCart}>
         {isProductInCart ? "Produit ajouté" : "Commandez"}

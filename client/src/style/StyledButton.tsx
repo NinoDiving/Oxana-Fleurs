@@ -15,9 +15,12 @@ export const StyledButton = styled(Button)(
       color: var(--color-input);
       background: var(--bckgColorCTA);
       border: var(--border-input);
+      transition: 0.5s ease;
   
       &:hover {
-        border-color: var(--border-color-input-focus);
+        border-color: black;
+        background-color: white;
+        color:black;
       }
     }
   `,

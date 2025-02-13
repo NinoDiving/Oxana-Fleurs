@@ -6,7 +6,7 @@ export default function BackOfficeNav() {
       <h1>Dashboard Oxana Fleurs</h1>
       <ul>
         <li>
-          <Link to="/Accueil">Accueil</Link>
+          <Link to="/admin">Accueil</Link>
         </li>
         <li>
           <Link to="/admin-fleurs">Fleurs</Link>

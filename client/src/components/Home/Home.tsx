@@ -1,12 +1,13 @@
 import HomeBouquet from "./HomeBouquet";
 import "./Home.css";
 import { useEffect, useState } from "react";
-import useIntersectionObserver from "../../hooks/Observer/useObserver";
+import useObserver from "../../hooks/Observer/useObserver";
 import BeMember from "./BeMember";
 import FormContact from "./FormContact";
 import HomePlants from "./HomePlants";
 import Openinghours from "./OpeningHours";
 import OurStory from "./OurStory";
+
 export default function Home() {
   const components = [
     <HomeBouquet key="homeBouquet" />,
@@ -20,8 +21,8 @@ export default function Home() {
   return (
     <>
       {components.map((Component) => {
-        const { isVisible, elementRef } = useIntersectionObserver({
-          rootMargin: "100px",
+        const { isVisible, elementRef } = useObserver({
+          rootMargin: "0px",
         });
 
         const [hasAppeared, setHasAppeared] = useState(false);

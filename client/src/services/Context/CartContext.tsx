@@ -10,20 +10,29 @@ const SaveToCartContext = createContext<SaveToCartContextProps | undefined>(
 );
 
 export function SaveToCartProvider({ children }: Props) {
-  const [saveToCart, setSaveToCart] = useState<ProductProps[]>([]);
+  const [saveToCart, setSaveToCart] = useState<ProductProps[]>(() => {
+    const savedProducts = localStorage.getItem("saveToCart");
+    return savedProducts ? JSON.parse(savedProducts) : [];
+  });
+
   const addToCart = (product: ProductProps) => {
     setSaveToCart((prevProduct) => {
-      if (!prevProduct.some((p) => p.id === product.id)) {
-        return [...prevProduct, product];
-      }
-      return prevProduct;
+      const updatedProducts = prevProduct.some((p) => p.id === product.id)
+        ? prevProduct
+        : [...prevProduct, product];
+      localStorage.setItem("saveToCart", JSON.stringify(updatedProducts));
+      return updatedProducts;
     });
   };
 
   const removeToCart = (productId: number) => {
-    setSaveToCart((prevProduct) =>
-      prevProduct.filter((product) => product.id !== productId),
-    );
+    setSaveToCart((prevProduct) => {
+      const updatedProducts = prevProduct.filter(
+        (product) => product.id !== productId,
+      );
+      localStorage.setItem("saveToCart", JSON.stringify(updatedProducts));
+      return updatedProducts;
+    });
   };
 
   const isProductSaved = (productId: number) => {

@@ -7,26 +7,45 @@ import BackOfficePlantes from "./components/BackOffice/BackOfficePlants/BackOffi
 import BackOfficeHome from "./components/BackOffice/Home/BackOfficeHome.tsx";
 import TopProducts from "./components/BackOffice/TopProducts/TopProducts.tsx";
 import Bouquet from "./components/Bouquet/Bouquet.tsx";
+import Cart from "./components/Cart/Cart.tsx";
 import Home from "./components/Home/Home.tsx";
-import Login from "./components/Login/Login.tsx";
 import Plants from "./components/Plants/Plants.tsx";
 import Product from "./components/Product/Product.tsx";
+import UserProfile from "./components/UserProfile/UserProfile.tsx";
+import { ProtectedRoute } from "./services/ProtectedRoute/ProtectedRoute.tsx";
+
 const router = createBrowserRouter([
   {
     path: "/admin",
-    element: <BackOfficeHome />,
+    element: (
+      <ProtectedRoute>
+        <BackOfficeHome />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin-fleurs",
-    element: <BackOfficeFlowers />,
+    element: (
+      <ProtectedRoute>
+        <BackOfficeFlowers />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin-plantes",
-    element: <BackOfficePlantes />,
+    element: (
+      <ProtectedRoute>
+        <BackOfficePlantes />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin-top-produits",
-    element: <TopProducts />,
+    element: (
+      <ProtectedRoute>
+        <TopProducts />
+      </ProtectedRoute>
+    ),
   },
   {
     element: <App />,
@@ -49,8 +68,12 @@ const router = createBrowserRouter([
         element: <Product />,
       },
       {
+        path: "/panier",
+        element: <Cart />,
+      },
+      {
         path: "/login",
-        element: <Login />,
+        element: <UserProfile />,
       },
     ],
   },

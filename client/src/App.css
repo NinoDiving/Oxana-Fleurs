@@ -37,6 +37,11 @@ a {
   color: black;
   font-family: var(--textFont);
   letter-spacing: var(--spacing-letter-ref);
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
 }
 
 p,

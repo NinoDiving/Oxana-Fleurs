@@ -1,4 +1,16 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const generateToken = (payload: object) => {
+  const jwtSecret = process.env.JWT_SECRET;
+
+  if (!jwtSecret) {
+    throw new Error(
+      "La clé secrète JWT_SECRET n'est pas définie dans le fichier .env",
+    );
+  }
+  return jwt.sign(payload, jwtSecret as string, { expiresIn: "1h" });
+};
 
 const hashPassword = async (password: string) => {
   try {
@@ -18,4 +30,4 @@ const matchPassword = async (password: string, hashedPassword: string) => {
     throw new Error("Erreur lors de la comparaison des mots de passe.");
   }
 };
-export default { hashPassword, matchPassword };
+export default { hashPassword, matchPassword, generateToken };

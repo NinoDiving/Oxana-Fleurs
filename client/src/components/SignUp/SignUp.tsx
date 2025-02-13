@@ -43,7 +43,7 @@ export default function SignUp() {
         handleCheckPassword={handleCheckPassword}
         handleConfirmedPassword={handleConfirmedPassword}
       />
-      <StyledButton type="submit">Création de mon compte</StyledButton>
+      <StyledButton type="submit">Créer un compte</StyledButton>
     </form>
   );
 }

@@ -1,6 +1,8 @@
 import useLogin from "../../hooks/Login/Login";
+import { StyledButton } from "../../style/StyledButton";
 import { StyledInput } from "../../style/StyledInput";
-
+import ModalForm from "../modal/ModalForm";
+import "./Login.css";
 export default function Login() {
   const {
     email,
@@ -31,8 +33,10 @@ export default function Login() {
           onChange={handleChangePassword}
         />
         {error && <p>{error}</p>}
-        <button type="submit">Se connecter</button>
+        <StyledButton type="submit">Se connecter</StyledButton>
       </form>
+      <h3>Vous n'avez pas de compte ?</h3>
+      <ModalForm />
     </main>
   );
 }

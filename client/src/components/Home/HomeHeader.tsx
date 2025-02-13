@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../style/StyledButton";
 import { StyledDatePicker } from "../../style/StyledDate";
 import { StyledInput } from "../../style/StyledInput";
 
 export default function HomeHeader() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [zipCode, setZipCode] = useState<string>("");
-
   const onChangeZipCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -35,9 +33,8 @@ export default function HomeHeader() {
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
         />
-        <StyledButton>
-          <Link to="/bouquets">Trouvez un bouquet</Link>
-        </StyledButton>
+
+        <Link to="/bouquets">Trouvez un bouquet</Link>
       </section>
     </article>
   );

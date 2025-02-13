@@ -83,13 +83,13 @@ const edit: RequestHandler = async (req, res, next) => {
 const authenticateUser: RequestHandler = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const user = await userRepository.getUserEmailWithIsAdmin({ email });
+    const user = await userRepository.getAuth({ email });
 
     if (!user) {
       res.status(401).json({ message: "Email incorrect." });
     }
 
-    const isPasswordMatch = await Auth.matchPassword(password, user.password);
+    const isPasswordMatch = await Auth.matchPassword(password, user?.password);
 
     if (!isPasswordMatch) {
       res.status(401).json({ message: "Mot de passe incorrect." });
@@ -97,22 +97,29 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
 
     req.body.password = null;
 
-    // const token = authServices.generateToken({
-    //   id: user.id,
-    //   email: user.email,
-    //   role: user.role,
-    // });
-    // res.cookie("token", token, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === "production",
-    //   maxAge: 3600000,
-    //   sameSite: "none",
-    // });
+    const token = Auth.generateToken({
+      id: user?.id,
+      lastname: user?.lastname,
+      firstname: user?.firstname,
+      email: user?.email,
+      isAdmin: user?.isAdmin,
+    });
+    res.cookie("token", token, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 3600000,
+      sameSite: "lax",
+      path: "/",
+    });
 
     res.status(200).json({
       message: "Connexion réussie",
-      //   role: user.role,
-      //   token,
+      id: user?.id,
+      lastname: user?.lastname,
+      firstname: user?.firstname,
+      email: user?.email,
+      isAdmin: user?.isAdmin,
+      token,
     });
   } catch (error) {
     next(error);

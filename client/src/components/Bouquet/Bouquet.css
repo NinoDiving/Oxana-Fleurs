@@ -1,12 +1,12 @@
 @import url("@src/variables.css");
 
-.banner-shop-bouquet {
+.catalogue-product {
   padding-top: calc(var(--spacing-ref) * 6);
   width: 100%;
   text-align: center;
 }
 
-.banner-shop-bouquet img {
+.catalogue-product img {
   border-radius: calc(var(--border-ref) * 2);
   margin: calc(var(--spacing-ref) * 1.5);
 }
@@ -57,4 +57,36 @@
 .mySwiper2 img {
   width: 100%;
   border-radius: var(--border-ref);
+}
+
+@media screen and (min-width: 1000px) {
+  .catalogue-product h1 {
+    font-size: calc(var(--font-size-ref) * 1.8);
+  }
+  .mySwiper2 {
+    margin: calc(var(--spacing-ref) * 2);
+  }
+
+  .cards-container p {
+    width: 40ch;
+  }
+
+  .flowers-container {
+    justify-self: center;
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .flowers-container h1 {
+    grid-column: span 3;
+  }
+
+  .flowers-container h3 {
+    font-size: calc(var(--font-size-ref) * 1.1);
+  }
+
+  .cards-container {
+    border: none;
+  }
 }

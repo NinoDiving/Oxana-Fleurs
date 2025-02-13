@@ -17,7 +17,7 @@ export default function InputPassword({
         id="password"
         value={password}
         onChange={handleCheckPassword}
-        type="text"
+        type="password"
         placeholder="Votre mot de passe"
       />
       {Object.keys(errors).length > 0 && (
@@ -36,7 +36,7 @@ export default function InputPassword({
         id="confirmed-password"
         value={confirmedPassword}
         onChange={handleConfirmedPassword}
-        type="text"
+        type="password"
         placeholder="Confirmez votre mot de passe"
       />
       {!isSamePassword ? <p>Mot de passe différent</p> : ""}

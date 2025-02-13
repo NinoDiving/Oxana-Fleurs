@@ -4,6 +4,7 @@ import type { Result, Rows } from "../../../database/client";
 import Auth from "../../services/Auth/Auth";
 
 type User = {
+  id: number;
   lastname: string;
   firstname: string;
   email: string;
@@ -29,7 +30,7 @@ class userRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific user by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT lastname, firstname, email FROM user 
+      `SELECT id, lastname, firstname, email FROM user 
 			 WHERE id = ?`,
       [id],
     );
@@ -42,7 +43,7 @@ class userRepository {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await databaseClient.query<Rows>(`
 			SELECT 
-			lastname, firstname, email
+			id, lastname, firstname, email
 			FROM user`);
 
     // Return the array of users
@@ -69,15 +70,29 @@ class userRepository {
     return result.affectedRows;
   }
 
-  async getUserEmailWithIsAdmin(user: { email: string }) {
+  async getAuth(user: { email: string }) {
     const [result] = await databaseClient.query<Rows>(
-      `SELECT email, password, isAdmin FROM user
-      WHERE email = ?
-      `,
+      `SELECT id, email, password, lastname, firstname, isAdmin 
+       FROM user 
+       WHERE email = ?`,
       [user.email],
     );
 
     if (!result[0]) {
+      return null;
+    }
+    return result[0];
+  }
+
+  async getUser(user: User) {
+    const [result] = await databaseClient.query<Rows>(
+      `SELECT id, lastname, firstname FROM user
+      WHERE id = ?`,
+      [user.id, user.lastname, user.firstname],
+    );
+
+    if (!result[0]) {
+      return null;
     }
     return result[0];
   }

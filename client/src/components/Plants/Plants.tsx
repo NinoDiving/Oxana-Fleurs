@@ -5,20 +5,36 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FetchTopPlants from "../../services/Product/FetchTopPlants";
+import HomeHeader from "../Home/HomeHeader";
 import AllPlants from "./AllPlants";
 
 export default function Plants() {
   const { topProductPlants } = FetchTopPlants();
+
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth <= 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
-      <section className="banner-shop-bouquet">
+      <HomeHeader />
+      <section className="catalogue-product">
         <h1>Nos Plantes de saison </h1>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          slidesPerView={2}
+          slidesPerView={isDesktop ? 2 : 5}
           initialSlide={2}
           loop={true}
           autoplay={{

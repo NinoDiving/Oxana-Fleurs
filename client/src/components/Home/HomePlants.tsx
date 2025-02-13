@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FetchTopPlants from "../../services/Product/FetchTopPlants";
 import { StyledButton } from "../../style/StyledButton";
 
@@ -10,12 +10,12 @@ export default function HomePlants() {
       <section className="home-plants-banniere">
         <h1>Découvrez aussi nos plantes</h1>
         <p>Apportez une touche de nature à votre intérieur et votre jardin !</p>
-        <StyledButton>Découvrez nos plantes</StyledButton>
+        <Link to={"/plantes"}>Découvrez nos plantes</Link>
       </section>
       <article className="container-plants">
         <h2>Nos plantes du moment</h2>
         {topProductPlants.map((plants) => (
-          <section key={plants.id} className="cards-container">
+          <section key={plants.product_id} className="cards-container">
             <img
               src={`${import.meta.env.VITE_URL}${plants.img_path}`}
               alt={plants.name}

@@ -1,5 +1,5 @@
 .main-footer {
-  background-color: beige;
+  background-color: var(--thirdColor-opacity);
   margin-top: var(--spacing-ref);
   text-align: center;
 }
@@ -7,5 +7,6 @@
 .social-link {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: var(--spacing-ref);
 }

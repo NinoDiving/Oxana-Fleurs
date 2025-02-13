@@ -1,10 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { useSaveToCart } from "../../services/Context/CartContext";
 import FetchDataFlowers from "../../services/FetchDataFlowers";
 import { StyledButton } from "../../style/StyledButton";
+import type { ProductProps } from "../../types/Product/ProductProps";
 
 export default function AllBouquets() {
   const { flowers } = FetchDataFlowers();
-  const navigate = useNavigate();
+  const { isProductSaved, addToCart } = useSaveToCart();
+
+  const isProductInCart = (flowersId: number) => isProductSaved(flowersId);
+
+  const handleAddtoCart = (flowers: ProductProps) => {
+    addToCart(flowers);
+  };
+
   return (
     <article className="flowers-container">
       <h1>Tous nos bouquets</h1>
@@ -17,8 +25,8 @@ export default function AllBouquets() {
           <h3>{flower.name}</h3>
           <p>{flower.description}</p>
           <p>Prix: {flower.price}€</p>
-          <StyledButton onClick={() => navigate(`/product/${flower.id}`)}>
-            Commandez
+          <StyledButton onClick={() => handleAddtoCart(flower)}>
+            {isProductInCart(flower.id) ? "Produit ajouté" : "Commandez"}
           </StyledButton>
         </section>
       ))}

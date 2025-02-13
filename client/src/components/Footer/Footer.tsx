@@ -1,4 +1,5 @@
 import { FacebookIcon } from "../../assets/iconeSVG/FacebookIcon";
+import { InstaIcon } from "../../assets/iconeSVG/InstaIcone";
 
 import "./Footer.css";
 export default function Footer() {
@@ -10,7 +11,7 @@ export default function Footer() {
           <FacebookIcon />
         </a>
         <a href="https://www.instagram.com/oxanafleurs/">
-          <h1>ICONE INSTA</h1>
+          <InstaIcon />
         </a>
       </article>
       <a href="#top">Retour en haut de page</a>

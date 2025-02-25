@@ -9,8 +9,8 @@ Oxana Fleurs est une plateforme e-commerce qui permet aux utilisateurs de décou
 ## 🚀 Fonctionnalités
 
 - 🛍️ **Catalogue de fleurs** : Parcourez une sélection variée de fleurs et bouquets.
-- 🔍 **Recherche avancée** : Trouvez rapidement vos fleurs préférées grâce à un système de filtres.
 - 📦 **Gestion des commandes** : Ajoutez des articles à votre panier et passez commande en toute simplicité.
+- 💰**Méthode de paiement**: Ajout de Stripes pour la méthode de paiement.
 - 🖼️ **Système de login** : Permet au utilisateur de s'inscrire pour facilité les achats.
 - 🖼️ **Images des produits** : Chaque bouquet est présenté avec une photo détaillée.
 - 🎨 **Back-office admin** : Interface d'administration pour gérer les produits, les commandes.

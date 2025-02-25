@@ -13,6 +13,7 @@ Oxana Fleurs est une plateforme e-commerce qui permet aux utilisateurs de décou
 - 💰**Méthode de paiement**: Ajout de Stripes pour la méthode de paiement.
 - 🖼️ **Système de login** : Permet au utilisateur de s'inscrire pour facilité les achats.
 - 🖼️ **Images des produits** : Chaque bouquet est présenté avec une photo détaillée.
+-  📅 **Système de contact**: L'utilisateur peut envoyé un email pour une demande particulière.
 - 🎨 **Back-office admin** : Interface d'administration pour gérer les produits, les commandes.
 
 ## 🛠️ Technologies utilisées
@@ -47,9 +48,7 @@ Le frontend sera accessible sur `http://localhost:3000` et le backend sur `http:
 
 ## 🔮 Améliorations futures
 
-- 📅 Système de réservation de fleurs pour des événements.
-- 💳 Intégration d'un module de paiement en ligne.
-- 📧 Envoi d'e-mails de confirmation de commande.
+- 📅 Gestion des commandes sur le Dashboard.
 
 ---
 

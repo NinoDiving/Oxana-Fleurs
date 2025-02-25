@@ -11,6 +11,10 @@
   text-align: left;
   padding-bottom: var(--spacing-ref);
 }
+
+.product-container button {
+  margin-top: calc(var(--spacing-ref) * 2);
+}
 .wrapper-picture {
   background-color: var(--bckgSecondColor);
   border-radius: var(--border-ref);
@@ -23,6 +27,7 @@
 .main-picture-product img {
   width: 70%;
   padding-left: var(--spacing-ref);
+  border-radius: 8px;
 }
 
 .small-picture-product img {

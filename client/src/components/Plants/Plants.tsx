@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FetchTopPlants from "../../services/Product/FetchTopPlants";
-import HomeHeader from "../Home/HomeHeader";
+import HeroBanner from "../HeroBanner/HeroBanner";
 import AllPlants from "./AllPlants";
 
 export default function Plants() {
@@ -28,7 +28,7 @@ export default function Plants() {
   }, []);
   return (
     <>
-      <HomeHeader />
+      <HeroBanner />
       <section className="catalogue-product">
         <h1>Nos Plantes de saison </h1>
         <Swiper

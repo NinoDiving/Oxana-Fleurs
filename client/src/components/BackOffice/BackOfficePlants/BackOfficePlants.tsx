@@ -1,6 +1,7 @@
 import useBackOffice from "../../../hooks/backOffice/BackOffice";
 import FetchDataPlants from "../../../services/Product/FetchDataPlants";
 import { StyledButton } from "../../../style/StyledButton";
+import { StyledInput } from "../../../style/StyledInput";
 import BackOfficeNav from "../BackOfficeNav";
 
 export default function BackOfficePlantes() {
@@ -22,32 +23,43 @@ export default function BackOfficePlantes() {
         <article key={plante.id} className="backOffice-products-cards">
           {editingProduct === plante.id ? (
             <>
+              <label htmlFor="edit-img">Photo</label>
               <input
+                id="edit-img"
                 type="file"
                 name="image"
                 accept="image/*"
                 onChange={handleFileChange}
               />
-              <input
+              <label htmlFor="name">Nom du produit</label>
+              <StyledInput
+                id="name"
                 type="text"
                 name="name"
                 value={formFields.name}
                 onChange={handleChange}
               />
+              <label htmlFor="description">Description</label>
               <textarea
+                id="description"
                 name="description"
                 value={formFields.description}
                 onChange={handleChange}
               />
-              <input
+              <label htmlFor="price">Prix</label>
+              <StyledInput
+                id="price"
                 type="number"
                 name="price"
                 value={formFields.price}
                 onChange={handleChange}
               />
-              <button type="button" onClick={() => handleSubmit(plante.id)}>
+              <StyledButton
+                type="button"
+                onClick={() => handleSubmit(plante.id)}
+              >
                 Enregistrer
-              </button>
+              </StyledButton>
               {!handleSubmit && alert("Validez les modifications ?")}
             </>
           ) : (

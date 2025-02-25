@@ -16,18 +16,25 @@ export function SaveToCartProvider({ children }: Props) {
   });
 
   const addToCart = (product: ProductProps) => {
-    setSaveToCart((prevProduct) => {
-      const updatedProducts = prevProduct.some((p) => p.id === product.id)
-        ? prevProduct
-        : [...prevProduct, product];
+    setSaveToCart((prevProducts) => {
+      const existingProductIndex = prevProducts.findIndex(
+        (p) => p.id === product.id,
+      );
+      if (existingProductIndex >= 0) {
+        const updatedProducts = [...prevProducts];
+        updatedProducts[existingProductIndex].quantity += 1;
+        localStorage.setItem("saveToCart", JSON.stringify(updatedProducts));
+        return updatedProducts;
+      }
+      const updatedProducts = [...prevProducts, { ...product, quantity: 1 }];
       localStorage.setItem("saveToCart", JSON.stringify(updatedProducts));
       return updatedProducts;
     });
   };
 
   const removeToCart = (productId: number) => {
-    setSaveToCart((prevProduct) => {
-      const updatedProducts = prevProduct.filter(
+    setSaveToCart((prevProducts) => {
+      const updatedProducts = prevProducts.filter(
         (product) => product.id !== productId,
       );
       localStorage.setItem("saveToCart", JSON.stringify(updatedProducts));
@@ -57,9 +64,7 @@ export function useSaveToCart() {
   const context = useContext(SaveToCartContext);
 
   if (!context) {
-    throw new Error(
-      "useSaveCards doit être utilisé à l'intérieur de SaveCardsProvider",
-    );
+    throw new Error("useSaveToCart must be used within a SaveToCartProvider");
   }
 
   return context;

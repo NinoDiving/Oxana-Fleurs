@@ -46,7 +46,7 @@ const add: RequestHandler = async (req, res, next) => {
 
     const newproducts = {
       name: req.body.name,
-      type_id: req.body.type_id,
+      type: req.body.type,
       description: req.body.description,
       price: req.body.price,
       img_path: req.file ? `assets/images/${req.file.filename}` : "",

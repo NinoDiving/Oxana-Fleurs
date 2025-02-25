@@ -5,7 +5,7 @@ import type { Result, Rows } from "../../../database/client";
 type Products = {
   id: number;
   name: string;
-  type_id: number;
+  type: string;
   description: string;
   price: number;
   img_path: string;
@@ -19,11 +19,11 @@ class productsRepository {
 
     try {
       await connection.beginTransaction();
-
       const [existingType] = await databaseClient.query<Rows>(
-        `SELECT id FROM type 
-         WHERE type = ?`,
-        [products.type_id],
+        `SELECT id 
+        FROM type 
+        WHERE type = ?`,
+        [products.type],
       );
 
       let type_id: number;
@@ -33,8 +33,9 @@ class productsRepository {
       } else {
         const [type_result] = await databaseClient.query<Result>(
           `INSERT INTO type 
-          (type) VALUES (?)`,
-          [products.type_id],
+          (type) 
+          VALUES (?)`,
+          [products.type],
         );
 
         if (!type_result.insertId) {
@@ -46,9 +47,8 @@ class productsRepository {
       }
 
       const [result] = await databaseClient.query<Result>(
-        `INSERT INTO product 
-        (name, description, price, img_path, type_id) 
-         VALUES (?, ?, ?, ?, ? )`,
+        `INSERT INTO product (name, description, price, img_path, type_id) 
+        VALUES (?, ?, ?, ?, ?)`,
         [
           products.name,
           products.description,

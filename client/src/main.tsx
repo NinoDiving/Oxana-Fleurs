@@ -5,10 +5,12 @@ import App from "./App.tsx";
 import BackOfficeFlowers from "./components/BackOffice/BackOfficeFlowers/BackOfficeFlowers.tsx";
 import BackOfficePlantes from "./components/BackOffice/BackOfficePlants/BackOfficePlants.tsx";
 import BackOfficeHome from "./components/BackOffice/Home/BackOfficeHome.tsx";
+import Orders from "./components/BackOffice/Orders/Orders.tsx";
 import TopProducts from "./components/BackOffice/TopProducts/TopProducts.tsx";
 import Bouquet from "./components/Bouquet/Bouquet.tsx";
 import Cart from "./components/Cart/Cart.tsx";
 import Home from "./components/Home/Home.tsx";
+import PaymentSuccessPage from "./components/Payment/SuccesPayment.tsx";
 import Plants from "./components/Plants/Plants.tsx";
 import Product from "./components/Product/Product.tsx";
 import UserProfile from "./components/UserProfile/UserProfile.tsx";
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/admin-orders",
+    element: (
+      <ProtectedRoute>
+        <Orders />
+      </ProtectedRoute>
+    ),
+  },
+  {
     element: <App />,
 
     children: [
@@ -70,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "/panier",
         element: <Cart />,
+      },
+      {
+        path: "/paymentSuccess",
+        element: <PaymentSuccessPage />,
       },
       {
         path: "/login",

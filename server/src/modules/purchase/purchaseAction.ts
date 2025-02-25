@@ -1,8 +1,6 @@
 import type { RequestHandler } from "express";
 import purchaseRepository from "./purchaseRepository";
 
-// Import access to data
-
 // The B of BREAD - Browse (Read All) operation
 const browse: RequestHandler = async (req, res, next) => {
   try {
@@ -39,6 +37,8 @@ const read: RequestHandler = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
+  const userId = req.body.user_id || req.user?.id || null;
+  const isGuest = userId === null;
   try {
     const newPurchase = {
       customer_phone: req.body.customer_phone,
@@ -47,13 +47,14 @@ const add: RequestHandler = async (req, res, next) => {
       customer_zip_code: req.body.customer_zip_code,
       delivery_date: req.body.delivery_date,
       total_price: req.body.total_price,
-      user_id: req.body.user_id,
-      purchase: req.body.purchase,
+      user_id: userId,
+      isGuest: isGuest,
+      items: Array.isArray(req.body.items) ? req.body.items : [],
     };
 
     // Create the purchase
     const insertId = await purchaseRepository.create(
-      { purchase: newPurchase.purchase },
+      newPurchase,
       req,
       res,
       next,
@@ -63,39 +64,10 @@ const add: RequestHandler = async (req, res, next) => {
     res.status(201).json({ insertId });
   } catch (err) {
     // Pass any errors to the error-handling middleware
-    next(err);
+    if (!res.headersSent) {
+      next(err);
+    }
   }
 };
 
-const edit: RequestHandler = async (req, res, next) => {
-  try {
-    const productUpdates = Object.fromEntries(
-      Object.entries(req.body).filter(([, value]) => value !== undefined),
-    );
-
-    if (req.file) {
-      productUpdates.img_path = `assets/images/${req.file.filename}`;
-    }
-
-    if (Object.keys(productUpdates).length === 0) {
-      res.status(400).json({ message: "Aucun champ à mettre à jour" });
-      return;
-    }
-
-    const updateProduct = await purchaseRepository.update({
-      id: Number(req.params.id),
-      ...productUpdates,
-    });
-
-    if (!updateProduct) {
-      res.sendStatus(404);
-      return;
-    }
-
-    res.sendStatus(204);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export default { browse, read, add, edit };
+export default { browse, read, add };

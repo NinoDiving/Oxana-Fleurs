@@ -1,7 +1,8 @@
 .admin-nav {
-  background-color: rgba(71, 71, 196, 0.87);
+  background-color: var(--secondColor);
   width: 100%;
   grid-column: span 3;
+  box-shadow: inset 0px 0px 2px 2px #2625250f;
 }
 
 .admin-nav h1 {
@@ -19,6 +20,7 @@
 }
 
 .add-product-container {
+  justify-items: center;
   margin: calc(var(--spacing-ref) * 2);
   padding: calc(var(--spacing-ref) * 2);
   box-shadow: 1px 2px 5px 2px #00000029;
@@ -27,7 +29,74 @@
   width: 50%;
 }
 
+.add-product-container select {
+  justify-self: center;
+  width: var(--width-input-form);
+  height: var(--height-input-form);
+  font-family: var(--textFont);
+  font-size: calc(var(--font-size-ref) * 0.875);
+  font-weight: var(--font-weight-S);
+  letter-spacing: var(--spacing-letter-ref);
+  line-height: 1.5;
+  padding: var(--padding-input);
+  margin-bottom: var(--spacing-ref);
+  border-radius: var(--border-ref);
+  color: var(--color-input-black);
+  background: var(--bckgColor-input);
+  border: var(--border-input);
+  box-shadow: var(--box-shadow-input);
+
+  &:hover {
+    border-color: var(--border-color-input-focus);
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: var(--border-color-input-focus);
+    box-shadow: var(--box-shadow-input-focus);
+  }
+}
+
+.add-product-container textarea,
+.backOffice-products-cards textarea {
+  resize: none;
+  justify-self: center;
+  width: calc(var(--width-input-form) * 1.5);
+  height: calc(var(--height-input-form) * 2);
+  font-family: var(--textFont);
+  font-size: calc(var(--font-size-ref) * 0.875);
+  font-weight: var(--font-weight-S);
+  letter-spacing: var(--spacing-letter-ref);
+  line-height: 1.5;
+  padding: var(--padding-input);
+  margin-bottom: var(--spacing-ref);
+  border-radius: var(--border-ref);
+  color: var(--color-input-black);
+  background: var(--bckgColor-input);
+  border: var(--border-input);
+  box-shadow: var(--box-shadow-input);
+
+  &:hover {
+    border-color: var(--border-color-input-focus);
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: var(--border-color-input-focus);
+    box-shadow: var(--box-shadow-input-focus);
+  }
+}
+
+#price {
+  margin-bottom: var(--spacing-ref);
+}
+
+#img_download {
+  margin-bottom: calc(var(--spacing-ref) * 2);
+}
+
 .edit-product-CTA {
+  margin-top: calc(var(--spacing-ref) * 2);
   justify-self: center;
   text-align: center;
 }
@@ -57,8 +126,20 @@
   grid-column: span 3;
 }
 
+.backOffice-products h2 {
+  grid-column: span 3;
+}
+
 .backOffice-products-cards {
+  margin-bottom: var(--spacing-ref);
+  height: auto;
+  display: flex;
+  flex-direction: column;
   width: 80%;
+}
+
+#edit-img {
+  margin-bottom: var(--spacing-ref);
 }
 
 .backOffice-products-cards img {

@@ -10,10 +10,10 @@
   justify-self: center;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: calc(var(--spacing-ref) * 2);
+  justify-content: space-between;
+  padding: calc(var(--spacing-ref) * 1);
   border-bottom: 1px solid rgba(41, 39, 39, 0.192);
-  width: 90%;
+  width: 100%;
 }
 
 .cart-product h3 {
@@ -45,6 +45,13 @@
 
 .button-container {
   display: flex;
+  gap: var(--spacing-ref);
+  width: 100%;
+}
+
+.validate-cart-btn {
+  width: 100% !important;
+  font-size: 0.78rem !important;
 }
 
 @media screen and (min-width: 1000px) {
@@ -53,6 +60,6 @@
   }
 
   .button-container {
-    justify-self: center;
+    justify-content: center;
   }
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useBackOffice from "../../../hooks/backOffice/BackOffice";
 import { StyledButton } from "../../../style/StyledButton";
+import { StyledInput } from "../../../style/StyledInput";
 import BackOfficeNav from "../BackOfficeNav";
 
 export default function BackOfficeHome() {
@@ -9,11 +10,19 @@ export default function BackOfficeHome() {
     handleFileChange,
     handleSubmitCreateProduct,
     formFields,
-    previewFile,
   } = useBackOffice();
   return (
     <main>
       <BackOfficeNav />
+      <section className="edit-product-CTA">
+        <h2>Modifiez un produit déjà existant</h2>
+        <StyledButton>
+          <Link to="/admin-fleurs">Modifiez les bouquets</Link>
+        </StyledButton>
+        <StyledButton>
+          <Link to="/admin-plantes">Modifiez les plantes</Link>
+        </StyledButton>
+      </section>
       <section className="add-product-container">
         <h2>Ajoutez un nouveau produit</h2>
         <form
@@ -24,14 +33,12 @@ export default function BackOfficeHome() {
         >
           <div className="field-container">
             <label htmlFor="name">Nom du produit:</label>
-            <input
+            <StyledInput
               type="text"
               name="name"
               id="name"
-              value={formFields.name}
               onChange={handleChange}
             />
-
             <label htmlFor="type">Type de produits</label>
             <select
               name="type"
@@ -40,13 +47,13 @@ export default function BackOfficeHome() {
               onChange={handleChange}
             >
               <option value="">Choissisez un type:</option>
-              <option value="plantes">plantes</option>
-              <option value="fleurs">fleurs</option>
+              <option value="plantes">Plantes</option>
+              <option value="fleurs">Fleurs</option>
             </select>
 
             <label htmlFor="description">Description du produit:</label>
-            <input
-              type="text"
+
+            <textarea
               name="description"
               id="description"
               value={formFields.description}
@@ -54,8 +61,8 @@ export default function BackOfficeHome() {
             />
 
             <label htmlFor="price">Prix</label>
-            <input
-              type="text"
+            <StyledInput
+              type="number"
               name="price"
               id="price"
               value={formFields.price}
@@ -67,37 +74,13 @@ export default function BackOfficeHome() {
               type="file"
               accept="image/*"
               name="img"
-              id="img"
+              id="img_download"
               onChange={handleFileChange}
             />
-
-            {previewFile && (
-              <div>
-                <p>Prévisualisation :</p>
-                <img
-                  src={previewFile}
-                  alt="Aperçu de l'image"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                  }}
-                />
-              </div>
-            )}
           </div>
         </form>
         <StyledButton type="button" onClick={handleSubmitCreateProduct}>
           Validez mon choix
-        </StyledButton>
-      </section>
-      <section className="edit-product-CTA">
-        <h2>Modifiez un produit déjà existant</h2>
-        <StyledButton>
-          <Link to="/admin-fleurs">Modifiez les bouquets</Link>
-        </StyledButton>
-        <StyledButton>
-          <Link to="/admin-plantes">Modifiez les plantes</Link>
         </StyledButton>
       </section>
     </main>

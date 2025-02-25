@@ -26,12 +26,12 @@
 
 .main-nav-visible {
   bottom: 0;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .main-nav-hidden {
   bottom: 0;
-  transform: translateX(-100%);
+  transform: translateY(400%);
 }
 
 .nav-bar {

@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 export type User = {
+  id: number;
   isAdmin: boolean;
   lastname: string;
   firstname: string;
@@ -21,6 +22,7 @@ export const useAuth = () => {
         const decodedToken = jwtDecode<User>(token);
 
         setUser({
+          id: decodedToken.id,
           isAdmin: decodedToken.isAdmin,
           lastname: decodedToken.lastname || "",
           firstname: decodedToken.firstname || "",

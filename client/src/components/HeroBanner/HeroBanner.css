@@ -1,0 +1,37 @@
+.hero-banner {
+  padding: calc(var(--spacing-ref) * 2);
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0px 0px 6px 1px #00000026;
+  height: 60vh;
+
+  & p {
+    letter-spacing: var(--spacing-letter-ref);
+    font-size: calc(var(--font-size-ref) * 0.7);
+  }
+}
+
+.hero-banner img {
+  width: 60%;
+}
+
+@media screen and (min-width: 500px) {
+  .hero-banner img {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .hero-banner {
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .hero-banner p {
+    margin-top: var(--spacing-ref);
+    font-size: calc(var(--font-size-ref) * 1);
+  }
+  .hero-banner img {
+    width: 40%;
+  }
+}

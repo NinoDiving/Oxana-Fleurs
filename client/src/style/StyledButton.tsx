@@ -13,6 +13,7 @@ export const StyledButton = styled(Button)(
       padding: var(--padding-input);
       border-radius: calc(var(--border-ref) * 3);
       color: var(--color-input);
+      margin-top: auto;
       background: var(--bckgColorCTA);
       border: var(--border-input);
       transition: 0.5s ease;

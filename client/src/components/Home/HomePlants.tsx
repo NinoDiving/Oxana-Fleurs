@@ -23,8 +23,10 @@ export default function HomePlants() {
             <h3>{plants.name}</h3>
             <p>{plants.description}</p>
             <p>Prix: {plants.price}€</p>
-            <StyledButton onClick={() => navigate(`/product/${plants.id}`)}>
-              Commandez
+            <StyledButton
+              onClick={() => navigate(`/product/${plants.product_id}`)}
+            >
+              Plus d'information
             </StyledButton>
           </section>
         ))}

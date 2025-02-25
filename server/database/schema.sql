@@ -42,9 +42,10 @@ CREATE TABLE purchase (
     customer_zip_code VARCHAR(10) NOT NULL,
     delivery_date DATE NOT NULL,
     total_price INT NOT NULL,
-    status ENUM('Pending', 'Shipped', 'Delivered', 'Cancelled') DEFAULT 'Pending',
+    status ENUM('En attente', 'Payée', 'En cours de livraison', 'Livrée') DEFAULT 'En attente',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    user_id INT NOT NULL,
+    isGuest BOOLEAN DEFAULT true,
+    user_id INT DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 

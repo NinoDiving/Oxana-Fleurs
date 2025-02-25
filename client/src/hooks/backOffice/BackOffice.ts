@@ -109,6 +109,7 @@ export default function useBackOffice() {
       }
       setIsConfirmed(true);
     }
+
     const formData = new FormData();
 
     for (const [key, value] of Object.entries(formFields)) {

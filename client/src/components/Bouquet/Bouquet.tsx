@@ -8,7 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import HomeHeader from "../Home/HomeHeader";
+import HeroBanner from "../HeroBanner/HeroBanner";
 import AllBouquets from "./AllBouquet";
 export default function Bouquet() {
   const { flowers } = FetchDataFlowers();
@@ -27,7 +27,7 @@ export default function Bouquet() {
 
   return (
     <>
-      <HomeHeader />
+      <HeroBanner />
       <main className="catalogue-product">
         <h1>Nos bouquets du moment </h1>
         <Swiper

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Autoplay, Navigation } from "swiper/modules";
 import FetchTopProductsFlowers from "../../services/Product/FetchTopFlowers";
-import HomeHeader from "./HomeHeader";
+import HeroBanner from "../HeroBanner/HeroBanner";
 export default function HomeBouquet() {
   const { topProductFlowers } = FetchTopProductsFlowers();
   const [isDesktop, setIsDesktop] = useState(false);
@@ -24,7 +24,7 @@ export default function HomeBouquet() {
 
   return (
     <>
-      <HomeHeader />
+      <HeroBanner />
       <section className="bouquets">
         <h2>Nos Bouquets</h2>
         <Swiper

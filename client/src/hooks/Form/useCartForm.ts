@@ -71,7 +71,7 @@ export default function useCartForm() {
     } catch (error) {
       console.error(error);
       alert("Une erreur est survenue");
-      return; // Exit the function if there is an error
+      return;
     }
 
     try {

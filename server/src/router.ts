@@ -78,13 +78,15 @@ router.put(
 );
 router.get("/api/user", verifyToken, adminAuthorization, userActions.browse);
 router.get("/user", verifyToken, (req, res) => {
-  const { firstname, lastname, email } = req.user;
+  const { firstname, lastname, email, isAdmin } = req.user;
 
   res.status(200).json({
     user: {
+      id: req.user.id,
       firstname,
       lastname,
       email,
+      isAdmin,
     },
   });
 });

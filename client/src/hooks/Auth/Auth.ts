@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export type User = {
   id: number;
-  isAdmin: boolean;
+  isAdmin: number;
   lastname: string;
   firstname: string;
   email: string;

@@ -1,15 +1,7 @@
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-
-type Products = {
-  id: number;
-  name: string;
-  type: string;
-  description: string;
-  price: number;
-  img_path: string;
-};
+import type { Products } from "../../types/product/product";
 
 class productsRepository {
   async create(products: Omit<Products, "id">) {

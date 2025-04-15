@@ -2,14 +2,7 @@ import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 import Auth from "../../services/Auth/Auth";
-
-type User = {
-  id: number;
-  lastname: string;
-  firstname: string;
-  email: string;
-  password: string;
-};
+import type { User } from "../../types/user/user";
 
 class userRepository {
   // The C of CRUD - Create operation

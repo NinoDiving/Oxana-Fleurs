@@ -1,38 +1,24 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/Auth/Auth";
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [isAdmin, setIsAdmin] = useState<number | null>(null);
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    // Récupérer le token depuis les cookies
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("token="))
-      ?.split("=")[1];
-
-    if (!token) {
-      setIsAdmin(false);
-      return;
-    }
-
-    try {
-      const decoded = JSON.parse(atob(token.split(".")[1]));
-
-      if (decoded?.isAdmin) {
-        setIsAdmin(true);
+    if (!loading) {
+      if (Number(user?.isAdmin) === 1) {
+        setIsAdmin(1);
       } else {
-        setIsAdmin(false);
+        setIsAdmin(0);
       }
-    } catch (error) {
-      console.error("Erreur lors du décodage du token:", error);
-      setIsAdmin(false);
     }
-  }, []);
+  }, [user, loading]);
 
-  if (isAdmin === null) {
+  if (loading || isAdmin === null) {
     return <div>Chargement...</div>;
   }
 
-  return isAdmin ? children : <Navigate to="/login" />;
+  return isAdmin === 1 ? children : <Navigate to="/login" />;
 };

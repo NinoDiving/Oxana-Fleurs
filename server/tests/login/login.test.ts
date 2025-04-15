@@ -51,7 +51,7 @@ describe("Test user registration", () => {
     const duplicateUser = {
       lastname: "Another",
       firstname: "User",
-      email: uniqueEmail,
+      email: "jauteenino@gmail.com",
       password: "Another123@password",
     };
 

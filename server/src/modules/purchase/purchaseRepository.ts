@@ -4,22 +4,7 @@ import databaseClient, {
   type Rows,
   type Result,
 } from "../../../database/client";
-
-type PurchaseItem = {
-  quantity: number;
-  price: number;
-  productId: number;
-};
-
-type Purchase = {
-  id: number;
-  name: string;
-  type_id: number;
-  description: string;
-  price: number;
-  img_path: string;
-  purchase: PurchaseItem[];
-};
+import type { Purchase } from "../../types/purchase/purchase";
 
 class purchaseRepository {
   async create(

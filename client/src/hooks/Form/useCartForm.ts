@@ -15,6 +15,7 @@ export default function useCartForm() {
     customer_city: "",
     customer_zip_code: "",
     delivery_date: "",
+    isClickandCollect: "1",
     total_price: totalPrice,
     items: [],
   });
@@ -51,13 +52,13 @@ export default function useCartForm() {
       customer_zip_code: formData.customer_zip_code,
       delivery_date: formData.delivery_date,
       total_price: totalPrice,
-      isGuest: !user,
+      isClickandCollect: formData.isClickandCollect,
       user_id: user ? user.id : null,
       items: items,
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_URL}cart`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(purchaseData),

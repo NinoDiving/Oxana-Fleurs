@@ -10,7 +10,7 @@ if (!jwtSecret) {
   );
 }
 
-const verifyToken: RequestHandler = (req, res, next) => {
+export const verifyToken: RequestHandler = (req, res, next) => {
   console.info("cookies reçus :", req.cookies.token);
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
@@ -34,5 +34,3 @@ const verifyToken: RequestHandler = (req, res, next) => {
     next(error);
   }
 };
-
-export default verifyToken;

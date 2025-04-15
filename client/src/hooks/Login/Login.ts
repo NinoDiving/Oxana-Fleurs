@@ -14,11 +14,18 @@ export default function useLogin() {
         credentials: "include",
       });
 
+      // Supprime le token des cookies
+      Cookies.remove("token", { path: "/" });
+
+      // Force le rechargement pour mettre à jour l'état de l'application
+      window.location.reload();
+
       navigate("/");
     } catch (error) {
       console.error(`Erreur lors de la déconnexion ${error}`);
     }
   };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -28,7 +35,6 @@ export default function useLogin() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: password }),
-        credentials: "include",
       });
 
       if (!response.ok) {

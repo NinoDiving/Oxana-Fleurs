@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS oxanafleurs;
+
 USE oxanafleurs;
 
 CREATE TABLE type (
@@ -37,15 +38,15 @@ CREATE TABLE top_product (
 CREATE TABLE purchase (
     id INT AUTO_INCREMENT PRIMARY KEY,
     customer_phone VARCHAR(20),
-    customer_address VARCHAR(255) NOT NULL,
-    customer_city VARCHAR(100) NOT NULL,
-    customer_zip_code VARCHAR(10) NOT NULL,
-    delivery_date DATE NOT NULL,
+    customer_address VARCHAR(255),
+    customer_city VARCHAR(100),
+    customer_zip_code VARCHAR(10),
+    delivery_date DATE,
     total_price INT NOT NULL,
     status ENUM('En attente', 'Payée', 'En cours de livraison', 'Livrée') DEFAULT 'En attente',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    isGuest BOOLEAN DEFAULT true,
-    user_id INT DEFAULT NULL,
+    isClickandCollect BOOLEAN DEFAULT false,
+    user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 

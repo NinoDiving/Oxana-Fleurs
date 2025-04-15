@@ -9,6 +9,7 @@ export default function InputFirstname({
     <fieldset>
       <label htmlFor="firstname">Votre prénom</label>
       <StyledInput
+        required
         name="firstname"
         id="firstname"
         onChange={handleChangeFormData}

@@ -31,15 +31,15 @@ class purchaseRepository {
       delivery_date: string;
       total_price: number;
       items: { product_id: number; quantity: number; price: number }[];
-      user_id: number | null;
-      isGuest: boolean;
+      user_id: number;
+      isClickandCollect: boolean;
     },
     req: Request,
     res: Response,
     next: NextFunction,
   ) {
     const userId = purchase.user_id;
-    const isGuest = purchase.isGuest;
+    const isClickandCollect = purchase.isClickandCollect;
     const connection = await databaseClient.getConnection();
 
     try {
@@ -48,9 +48,9 @@ class purchaseRepository {
         new Date(purchase.delivery_date),
         "yyyy-MM-dd",
       );
-      const [purchaseResult] = await connection.query<Result>(
+      const [purchaseResult] = await connection.execute<Result>(
         `INSERT INTO purchase 
-        (customer_phone, customer_address, customer_city, customer_zip_code, delivery_date, total_price, user_id, isGuest) 
+        (customer_phone, customer_address, customer_city, customer_zip_code, delivery_date, total_price, user_id, isClickandCollect) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           purchase.customer_phone,
@@ -59,8 +59,8 @@ class purchaseRepository {
           purchase.customer_zip_code,
           formattedDeliveryDate,
           purchase.total_price,
-          userId === null ? null : userId,
-          isGuest,
+          userId,
+          isClickandCollect,
         ],
       );
       const purchase_id = purchaseResult.insertId;
@@ -86,7 +86,7 @@ class purchaseRepository {
 
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific purchase by its ID
-    const [rows] = await databaseClient.query<Rows>(
+    const [rows] = await databaseClient.execute<Rows>(
       `SELECT 
        p.id AS purchase_id,
        p.customer_phone,
@@ -144,68 +144,56 @@ class purchaseRepository {
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all purchases from the "purchase" table
-    const [rows] = await databaseClient.query<Rows>(`
-			SELECT 
-       p.id AS purchase_id,
-       p.customer_phone,
-       p.customer_address,
-       p.customer_city,
-       p.customer_zip_code,
-       p.delivery_date,
-       p.total_price,
-       p.status,
-       p.isGuest,
-       p.user_id,
-       pi.id AS purchase_item_id,
-       pi.quantity,
-       pi.price,
-       pi.product_id,
-       pr.name AS product_name,
-       pr.description AS product_description,
-       pr.price AS product_price,
-       pr.img_path AS product_image,
-       user.firstname,
-       user.lastname
-       FROM purchase p
-       JOIN purchase_item pi ON p.id = pi.purchase_id
-       JOIN product pr ON pi.product_id = pr.id
-       LEFT JOIN user ON p.user_id = user.id
-       ORDER BY p.id DESC;`);
+    const [rows] = await databaseClient.execute<Rows>(`
+      SELECT 
+        p.id AS purchase_id,
+        u.firstname,
+        u.lastname,
+        p.customer_phone,
+        p.customer_address,
+        p.customer_city,
+        p.customer_zip_code,
+        p.delivery_date,
+        p.total_price,
+        p.status,
+        p.user_id,
+        p.isClickandCollect,
+        JSON_ARRAYAGG(
+          JSON_OBJECT(
+            'name', pr.name,
+            'price', pr.price,
+            'img_path', pr.img_path,
+            'description', pr.description,
+            'type_id', pr.type_id,
+            'quantity', pi.quantity
+          )
+        ) as products
+      FROM purchase p
+      JOIN purchase_item pi ON p.id = pi.purchase_id
+      JOIN product pr ON pi.product_id = pr.id
+      LEFT JOIN user u ON p.user_id = u.id
+      GROUP BY p.id
+      ORDER BY p.delivery_date ASC;
+    `);
 
-    // Return the array of purchases
-    const formattedRows = rows.map((row) => {
-      return {
-        id: row.purchase_id,
-        name: row.product_name,
-        type_id: row.product_id,
-        description: row.product_description,
-        price: row.product_price,
-        img_path: row.product_image,
-        purchase: [
-          {
-            quantity: row.quantity,
-            price: row.price,
-            productId: row.product_id,
-          },
-        ],
-        delivery_date: format(new Date(row.delivery_date), "dd/MM/yyyy"),
-        customer_phone: row.customer_phone,
-        customer_address: row.customer_address,
-        customer_city: row.customer_city,
-        customer_zip_code: row.customer_zip_code,
-        total_price: row.total_price,
-        status: row.status,
-        isGuest: row.isGuest,
-        user_id: row.user_id,
-      };
-    });
+    const formattedRows = rows.map((row) => ({
+      id: row.purchase_id,
+      delivery_date: format(new Date(row.delivery_date), "dd/MM/yyyy"),
+      customer_name: `${row.firstname} ${row.lastname}`,
+      customer_phone: row.customer_phone,
+      customer_address: row.customer_address,
+      customer_city: row.customer_city,
+      customer_zip_code: row.customer_zip_code,
+      total_price: row.total_price,
+      status: row.status,
+      isClickandCollect: row.isClickandCollect,
+      user_id: row.user_id,
+      products: row.products,
+    }));
 
-    return formattedRows as Purchase[];
+    return formattedRows;
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing purchase
   async update(purchase: Partial<Purchase>) {
     try {
       const entries = Object.entries(purchase).filter(
@@ -227,7 +215,7 @@ class purchaseRepository {
 
       const query = `UPDATE product SET ${updates} WHERE id = ?`;
 
-      const [purchaseResult] = await databaseClient.query<Result>(
+      const [purchaseResult] = await databaseClient.execute<Result>(
         query,
         values,
       );

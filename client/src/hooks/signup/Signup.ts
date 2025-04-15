@@ -1,4 +1,3 @@
-import type React from "react";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { FormData } from "../../types/signup/FormData";

@@ -14,10 +14,10 @@ export default function AllBouquets() {
   };
 
   return (
-    <article className="flowers-container">
+    <section className="flowers-container">
       <h1>Tous nos bouquets</h1>
       {flowers.map((flower) => (
-        <section key={flower.id} className="cards-container">
+        <article key={flower.id} className="cards-container">
           <img
             src={`${import.meta.env.VITE_URL}${flower.img_path}`}
             alt={flower.name}
@@ -28,8 +28,8 @@ export default function AllBouquets() {
           <StyledButton onClick={() => handleAddtoCart(flower)}>
             {isProductInCart(flower.id) ? "Produit ajouté" : "Commandez"}
           </StyledButton>
-        </section>
+        </article>
       ))}
-    </article>
+    </section>
   );
 }

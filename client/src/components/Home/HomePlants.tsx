@@ -10,7 +10,7 @@ export default function HomePlants() {
       <section className="home-plants-banniere">
         <h1>Découvrez aussi nos plantes</h1>
         <p>Apportez une touche de nature à votre intérieur et votre jardin !</p>
-        <Link to={"/plantes"}>Découvrez nos plantes</Link>
+        <Link to={"/plants"}>Découvrez nos plantes</Link>
       </section>
       <article className="container-plants">
         <h2>Nos plantes du moment</h2>

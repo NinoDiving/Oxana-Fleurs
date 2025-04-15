@@ -13,6 +13,7 @@ export default function BackOfficePlantes() {
     handleFileChange,
     handleSubmit,
     handleSubmitToTopProducts,
+    handleDeleteProduct,
     formFields,
   } = useBackOffice();
   return (
@@ -72,6 +73,12 @@ export default function BackOfficePlantes() {
                 {plante.name}{" "}
                 <button type="button" onClick={() => handleEdit(plante)}>
                   🖊️
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteProduct(plante.id)}
+                >
+                  ❌
                 </button>
               </h2>
               <p>{plante.description} </p>

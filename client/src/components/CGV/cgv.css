@@ -1,0 +1,29 @@
+.cgv-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.cgv-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.cgv-section {
+  margin-bottom: 32px;
+}
+
+.cgv-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.cgv-section ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}

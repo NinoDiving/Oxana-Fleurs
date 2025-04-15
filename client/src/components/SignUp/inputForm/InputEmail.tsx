@@ -10,6 +10,7 @@ export default function InputEmail({
       {" "}
       <label htmlFor="email">Votre adresse e-mail</label>
       <StyledInput
+        required
         name="email"
         onChange={handleChangeFormData}
         id="email"

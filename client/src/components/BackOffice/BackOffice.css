@@ -8,6 +8,7 @@
 .admin-nav h1 {
   font-size: calc(var(--font-size-ref) * 1.5);
   text-align: center;
+  padding: calc(var(--spacing-ref) * 1);
 }
 
 .admin-nav ul {
@@ -99,10 +100,14 @@
   margin-top: calc(var(--spacing-ref) * 2);
   justify-self: center;
   text-align: center;
-}
 
-.edit-product-CTA a {
-  color: white;
+  & a {
+    color: white;
+  }
+
+  & a:hover {
+    color: black;
+  }
 }
 
 .field-container {
@@ -115,10 +120,6 @@
   align-items: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-}
-
-.preview-img {
-  width: 30%;
 }
 
 .backOffice-products h1 {

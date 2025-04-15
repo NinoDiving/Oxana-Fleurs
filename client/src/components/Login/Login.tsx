@@ -14,6 +14,7 @@ export default function Login() {
   } = useLogin();
   return (
     <main className="login-container">
+      <img src="./img/Logo.png" alt="logo" />
       <form action="" className="login-form" onSubmit={handleLogin}>
         <label htmlFor="email">Votre adresse e-mail</label>
         <StyledInput

@@ -2,7 +2,7 @@ import type { JwtPayload } from "jsonwebtoken";
 
 export type CustomJwtPayload = {
   id: string;
-  isAdmin: boolean;
+  isAdmin: number;
   lastname: string;
   firstname: string;
   email: string;

@@ -7,12 +7,13 @@ const adminAuthorization = (
 ) => {
   if (!req.user) {
     res.status(403).json({ message: "Accès refusé" });
+
     return;
   }
 
   const user = req.user as CustomJwtPayload;
 
-  if (!user.isAdmin) {
+  if (user.isAdmin === 0) {
     res.status(403).json({ message: "Accès refusé" });
     return;
   }

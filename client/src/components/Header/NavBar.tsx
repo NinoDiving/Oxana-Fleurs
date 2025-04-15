@@ -51,12 +51,12 @@ export default function NavBar() {
         <BottomNavigationAction
           label="Plantes"
           icon={<SpaIcon />}
-          href="/plantes"
+          href="/plants"
         />
         <BottomNavigationAction
           label="Panier"
           icon={<ShoppingBasketIcon />}
-          href="/panier"
+          href="/cart"
         />
         <BottomNavigationAction
           label="Profile"

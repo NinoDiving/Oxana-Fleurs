@@ -5,6 +5,7 @@ import InputFirstname from "./inputForm/InputFirstname";
 import InputLastname from "./inputForm/InputLastname";
 import InputPassword from "./inputForm/InputPassword";
 import "./SignUp.css";
+import InputCG from "./inputForm/InputCG";
 export default function SignUp() {
   const {
     handleSubmitUserData,
@@ -43,6 +44,7 @@ export default function SignUp() {
         handleCheckPassword={handleCheckPassword}
         handleConfirmedPassword={handleConfirmedPassword}
       />
+      <InputCG />
       <StyledButton type="submit">Créer un compte</StyledButton>
     </form>
   );

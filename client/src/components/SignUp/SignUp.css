@@ -14,10 +14,24 @@ fieldset {
 
 .sign-up-container {
   justify-self: center;
+  justify-items: center;
 }
 
 .error {
   color: rgba(255, 0, 0, 0.63);
+}
+
+.checkbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: var(--spacing-ref);
+}
+
+#cgu,
+#cgv {
+  width: 100%;
+  height: calc(var(--spacing-ref) * 1.3);
 }
 
 .error::before {

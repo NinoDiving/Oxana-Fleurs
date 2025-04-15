@@ -14,6 +14,7 @@ export default function BackOfficeFlowers() {
     handleFileChange,
     handleSubmit,
     handleSubmitToTopProducts,
+    handleDeleteProduct,
     formFields,
   } = useBackOffice();
   return (
@@ -73,6 +74,12 @@ export default function BackOfficeFlowers() {
                 {flower.name}{" "}
                 <button type="button" onClick={() => handleEdit(flower)}>
                   🖊️
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteProduct(flower.id)}
+                >
+                  ❌
                 </button>
               </h2>
               <p>{flower.description} </p>

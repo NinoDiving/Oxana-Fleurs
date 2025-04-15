@@ -17,20 +17,15 @@ export default function BackOfficeHome() {
       <section className="edit-product-CTA">
         <h2>Modifiez un produit déjà existant</h2>
         <StyledButton>
-          <Link to="/admin-fleurs">Modifiez les bouquets</Link>
+          <Link to="/admin-flowers">Modifiez les bouquets</Link>
         </StyledButton>
         <StyledButton>
-          <Link to="/admin-plantes">Modifiez les plantes</Link>
+          <Link to="/admin-plants">Modifiez les plantes</Link>
         </StyledButton>
       </section>
       <section className="add-product-container">
         <h2>Ajoutez un nouveau produit</h2>
-        <form
-          action=""
-          method="post"
-          className="add-product"
-          onSubmit={handleSubmitCreateProduct}
-        >
+        <form method="post" className="add-product">
           <div className="field-container">
             <label htmlFor="name">Nom du produit:</label>
             <StyledInput
@@ -79,7 +74,7 @@ export default function BackOfficeHome() {
             />
           </div>
         </form>
-        <StyledButton type="button" onClick={handleSubmitCreateProduct}>
+        <StyledButton type="submit" onClick={handleSubmitCreateProduct}>
           Validez mon choix
         </StyledButton>
       </section>

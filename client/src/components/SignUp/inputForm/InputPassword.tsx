@@ -13,6 +13,7 @@ export default function InputPassword({
     <fieldset>
       <label htmlFor="password">Votre mot de passe</label>
       <StyledInput
+        required
         name="password"
         id="password"
         value={password}
@@ -32,6 +33,7 @@ export default function InputPassword({
       )}
       <label htmlFor="confirmed-password">Confirmez le mot de passe</label>
       <StyledInput
+        required
         name="confirmed-password"
         id="confirmed-password"
         value={confirmedPassword}

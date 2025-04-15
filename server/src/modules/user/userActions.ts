@@ -95,8 +95,6 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
       res.status(401).json({ message: "Mot de passe incorrect." });
     }
 
-    req.body.password = null;
-
     const token = Auth.generateToken({
       id: user?.id,
       lastname: user?.lastname,
@@ -105,7 +103,7 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
       isAdmin: user?.isAdmin,
     });
     res.cookie("token", token, {
-      httpOnly: false,
+      httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 3600000,
       sameSite: "lax",
@@ -126,4 +124,13 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add, edit, authenticateUser };
+const logout: RequestHandler = async (req, res, next) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+  });
+  res.status(200).json({ message: "Déconnexion réussie" });
+};
+
+export default { browse, read, add, edit, authenticateUser, logout };

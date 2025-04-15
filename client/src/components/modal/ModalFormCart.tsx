@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+import { useState } from "react";
 import { StyledButton } from "../../style/StyledButton";
 import CartForm from "../Cart/Form/CartForm";
 
@@ -21,7 +21,7 @@ const style = {
 };
 
 export default function ModalFormCart() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

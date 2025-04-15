@@ -2,12 +2,14 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
+import CGUPage from "./CGU/cgu.tsx";
 import BackOfficeFlowers from "./components/BackOffice/BackOfficeFlowers/BackOfficeFlowers.tsx";
 import BackOfficePlantes from "./components/BackOffice/BackOfficePlants/BackOfficePlants.tsx";
 import BackOfficeHome from "./components/BackOffice/Home/BackOfficeHome.tsx";
 import Orders from "./components/BackOffice/Orders/Orders.tsx";
 import TopProducts from "./components/BackOffice/TopProducts/TopProducts.tsx";
 import Bouquet from "./components/Bouquet/Bouquet.tsx";
+import CGVPage from "./components/CGV/Cgv.tsx";
 import Cart from "./components/Cart/Cart.tsx";
 import Home from "./components/Home/Home.tsx";
 import PaymentSuccessPage from "./components/Payment/SuccesPayment.tsx";
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/admin-fleurs",
+    path: "/admin-flowers",
     element: (
       <ProtectedRoute>
         <BackOfficeFlowers />
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/admin-plantes",
+    path: "/admin-plants",
     element: (
       <ProtectedRoute>
         <BackOfficePlantes />
@@ -42,10 +44,18 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/admin-top-produits",
+    path: "/admin-top-products",
     element: (
       <ProtectedRoute>
         <TopProducts />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin-orders",
+    element: (
+      <ProtectedRoute>
+        <Orders />
       </ProtectedRoute>
     ),
   },
@@ -70,7 +80,7 @@ const router = createBrowserRouter([
         element: <Bouquet />,
       },
       {
-        path: "/plantes",
+        path: "/plants",
         element: <Plants />,
       },
       {
@@ -78,12 +88,20 @@ const router = createBrowserRouter([
         element: <Product />,
       },
       {
-        path: "/panier",
+        path: "/cart",
         element: <Cart />,
       },
       {
         path: "/paymentSuccess",
         element: <PaymentSuccessPage />,
+      },
+      {
+        path: "/cgv",
+        element: <CGVPage />,
+      },
+      {
+        path: "/cgu",
+        element: <CGUPage />,
       },
       {
         path: "/login",

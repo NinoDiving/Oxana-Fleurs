@@ -2,7 +2,6 @@ import { useSaveToCart } from "../../services/Context/CartContext";
 import FetchDataPlants from "../../services/Product/FetchDataPlants";
 import { StyledButton } from "../../style/StyledButton";
 import type { ProductProps } from "../../types/Product/ProductProps";
-
 export default function AllPlants() {
   const { plants } = FetchDataPlants();
   const { addToCart, isProductSaved } = useSaveToCart();
@@ -15,7 +14,7 @@ export default function AllPlants() {
     <article className="flowers-container">
       <h1>Toute nos plantes</h1>
       {plants.map((plante) => (
-        <section key={plante.id} className="cards-container">
+        <section key={plante.id} className="cards-container plant-card">
           <img
             src={`${import.meta.env.VITE_URL}${plante.img_path}`}
             alt={plante.name}

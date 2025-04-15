@@ -9,6 +9,7 @@ export default function InputLastname({
     <fieldset>
       <label htmlFor="lastname">Votre nom</label>
       <StyledInput
+        required
         name="lastname"
         id="lastname"
         onChange={handleChangeFormData}

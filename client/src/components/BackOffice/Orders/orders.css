@@ -1,0 +1,24 @@
+.orders-container {
+  padding-bottom: calc(var(--spacing-ref) * 2);
+  & h1 {
+    text-align: center;
+    padding: calc(var(--spacing-ref) * 2);
+  }
+}
+
+.order-card {
+  display: flex;
+  border-radius: var(--border-ref);
+  gap: calc(var(--spacing-ref) * 2);
+  padding: calc(var(--spacing-ref) * 2);
+  box-shadow: 0 0 6px 0px rgb(0 0 0 / 14%);
+
+  & img {
+    width: 40%;
+    border-radius: var(--border-ref);
+  }
+}
+
+.products-container {
+  display: flex;
+}

@@ -33,11 +33,7 @@ export default function Product() {
       <h1>{product?.name}</h1>
       <div className="wrapper-picture">
         <article className="main-picture-product">
-          {mainImage ? (
-            <img src={mainImage} alt={product?.name} />
-          ) : (
-            <p>Chargement de l'image...</p>
-          )}
+          {mainImage && <img src={mainImage} alt={product?.name} />}
           <div className="small-picture-product">
             {smallImages.map((image) => (
               <img

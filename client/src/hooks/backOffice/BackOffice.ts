@@ -4,7 +4,6 @@ import type { ProductProps } from "../../types/Product/ProductProps";
 export default function useBackOffice() {
   const [editingProduct, setEditingProduct] = useState<number | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const [previewFile, setPreviewFile] = useState<string | null>(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [formFields, setFormFields] = useState({
     name: "",
@@ -28,11 +27,6 @@ export default function useBackOffice() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       setFile(e.target.files[0]);
-
-      if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        setPreviewFile(imageUrl);
-      }
     }
   };
 
@@ -66,6 +60,7 @@ export default function useBackOffice() {
     await fetch(`${import.meta.env.VITE_API_URL}/products/${productId}`, {
       method: "PUT",
       body: updatedFormData,
+      credentials: "include",
     });
 
     setEditingProduct(null);
@@ -126,15 +121,14 @@ export default function useBackOffice() {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/products`, {
         method: "POST",
         body: formData,
+        credentials: "include",
       });
 
       if (!response.ok) {
         throw new Error("Erreur lors de l'envoi de la donnée");
       }
 
-      const data = await response.json();
-
-      console.info("Produit ajouté avec succès:", data);
+      alert("Produit ajouté avec succès");
       setFormFields({
         name: "",
         description: "",
@@ -147,6 +141,30 @@ export default function useBackOffice() {
     }
   };
 
+  const handleDeleteProduct = async (productId: number) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/products/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        },
+      );
+
+      if (response.ok) {
+        alert("Produit supprimé avec succès");
+        window.location.reload();
+      } else {
+        throw new Error("Erreur lors de la suppression du produit");
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+    }
+  };
+
   return {
     handleChange,
     handleEdit,
@@ -154,8 +172,8 @@ export default function useBackOffice() {
     handleSubmit,
     handleSubmitToTopProducts,
     handleSubmitCreateProduct,
+    handleDeleteProduct,
     editingProduct,
-    previewFile,
     formFields,
   };
 }

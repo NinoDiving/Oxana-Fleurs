@@ -9,13 +9,16 @@ export default function BackOfficeNav() {
           <Link to="/admin">Accueil</Link>
         </li>
         <li>
-          <Link to="/admin-fleurs">Fleurs</Link>
+          <Link to="/admin-flowers">Fleurs</Link>
         </li>
         <li>
-          <Link to="/admin-plantes">Plantes</Link>
+          <Link to="/admin-plants">Plantes</Link>
         </li>
         <li>
-          <Link to="/admin-top-produits">Top-produits</Link>
+          <Link to="/admin-top-products">Top-produits</Link>
+        </li>
+        <li>
+          <Link to="/admin-orders">Commandes</Link>
         </li>
       </ul>
     </nav>

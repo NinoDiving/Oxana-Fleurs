@@ -48,9 +48,8 @@ export default function HomeBouquet() {
                   src={`${import.meta.env.VITE_URL}/${flower.img_path}`}
                   alt={flower.name}
                 />
+                <h3>{flower.name}</h3>
               </Link>
-
-              <h3>{flower.name}</h3>
             </SwiperSlide>
           ))}
         </Swiper>

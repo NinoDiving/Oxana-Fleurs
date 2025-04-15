@@ -13,7 +13,7 @@ class topProductsRepository {
       await connection.beginTransaction();
 
       // Vérifier que le produit existe
-      const [product] = await connection.query<Rows>(
+      const [product] = await connection.execute<Rows>(
         `SELECT 
         product.name, 
         product.description, 
@@ -31,7 +31,7 @@ class topProductsRepository {
       }
 
       // Ajouter le produit à la table top_products
-      const [result] = await connection.query<Result>(
+      const [result] = await connection.execute<Result>(
         "INSERT INTO top_product (product_id) VALUES (?)",
         [product_id],
       );
@@ -48,7 +48,7 @@ class topProductsRepository {
 
   // The Rs of CRUD - Read operations
   async read(id: number) {
-    const [rows] = await databaseClient.query<Rows>(
+    const [rows] = await databaseClient.execute<Rows>(
       `SELECT 
        top_product.product_id,
        product.name, 
@@ -68,7 +68,7 @@ class topProductsRepository {
   }
 
   async readAll() {
-    const [rows] = await databaseClient.query<Rows>(
+    const [rows] = await databaseClient.execute<Rows>(
       `SELECT product_id, product.name, product.description, product.price, product.img_path, type.type
        FROM top_product
        INNER JOIN product
@@ -96,7 +96,7 @@ class topProductsRepository {
 
       const query = `UPDATE top_product SET ${updates} WHERE product_id = ?`;
 
-      const [topProductsResult] = await databaseClient.query<Result>(
+      const [topProductsResult] = await databaseClient.execute<Result>(
         query,
         values,
       );

@@ -29,7 +29,7 @@ class userRepository {
 
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific user by its ID
-    const [rows] = await databaseClient.query<Rows>(
+    const [rows] = await databaseClient.execute<Rows>(
       `SELECT id, lastname, firstname, email FROM user 
 			 WHERE id = ?`,
       [id],
@@ -41,7 +41,7 @@ class userRepository {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
-    const [rows] = await databaseClient.query<Rows>(`
+    const [rows] = await databaseClient.execute<Rows>(`
 			SELECT 
 			id, lastname, firstname, email
 			FROM user`);
@@ -60,7 +60,7 @@ class userRepository {
       hashedPassword = await Auth.hashPassword(user.password);
     }
 
-    const [result] = await databaseClient.query<Result>(
+    const [result] = await databaseClient.execute<Result>(
       `UPDATE user
        SET lastname = ?, firstname = ?, email = ?, password = ?
        WHERE id = ?`,
@@ -71,7 +71,7 @@ class userRepository {
   }
 
   async getAuth(user: { email: string }) {
-    const [result] = await databaseClient.query<Rows>(
+    const [result] = await databaseClient.execute<Rows>(
       `SELECT id, email, password, lastname, firstname, isAdmin 
        FROM user 
        WHERE email = ?`,
@@ -85,7 +85,7 @@ class userRepository {
   }
 
   async getUser(user: User) {
-    const [result] = await databaseClient.query<Rows>(
+    const [result] = await databaseClient.execute<Rows>(
       `SELECT id, lastname, firstname FROM user
       WHERE id = ?`,
       [user.id, user.lastname, user.firstname],

@@ -12,14 +12,12 @@ type Products = {
 };
 
 class productsRepository {
-  // The C of CRUD - Create operation
-
   async create(products: Omit<Products, "id">) {
     const connection = await databaseClient.getConnection();
 
     try {
       await connection.beginTransaction();
-      const [existingType] = await databaseClient.query<Rows>(
+      const [existingType] = await databaseClient.execute<Rows>(
         `SELECT id 
         FROM type 
         WHERE type = ?`,
@@ -31,7 +29,7 @@ class productsRepository {
       if (existingType.length > 0) {
         type_id = existingType[0].id;
       } else {
-        const [type_result] = await databaseClient.query<Result>(
+        const [type_result] = await databaseClient.execute<Result>(
           `INSERT INTO type 
           (type) 
           VALUES (?)`,
@@ -46,7 +44,7 @@ class productsRepository {
         type_id = type_result.insertId;
       }
 
-      const [result] = await databaseClient.query<Result>(
+      const [result] = await databaseClient.execute<Result>(
         `INSERT INTO product (name, description, price, img_path, type_id) 
         VALUES (?, ?, ?, ?, ?)`,
         [
@@ -73,11 +71,8 @@ class productsRepository {
     }
   }
 
-  // The Rs of CRUD - Read operations
-
   async read(id: number) {
-    // Execute the SQL SELECT query to retrieve a specific products by its ID
-    const [rows] = await databaseClient.query<Rows>(
+    const [rows] = await databaseClient.execute<Rows>(
       `SELECT product.id, name, description, price, img_path, type.type 
       FROM product
       INNER JOIN type
@@ -86,38 +81,28 @@ class productsRepository {
       [id],
     );
 
-    // Return the first row of the result, which represents the products
     return rows[0] as Products;
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all productss from the "products" table
-    const [rows] = await databaseClient.query<Rows>(`
+    const [rows] = await databaseClient.execute<Rows>(`
 			SELECT 
 			product.id, name,description,price,img_path , type.type
 			FROM product
       INNER JOIN type
       ON type.id = product.type_id`);
 
-    // Return the array of productss
     return rows as Products[];
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing products
-  async update(products: Partial<Products>) {
+  async update(products: Products) {
     try {
       const entries = Object.entries(products).filter(
         ([key, value]) => key !== "id" && value !== undefined,
       );
 
-      if (entries.length === 0) {
-        throw new Error("Aucun champ à mettre à jour");
-      }
-
       const updates = entries.map(([key]) => `${key} = ?`).join(", ");
       const values = entries.map(([, value]) => value);
-
       if (products.id !== undefined) {
         values.push(products.id);
       } else {
@@ -136,12 +121,31 @@ class productsRepository {
     }
   }
 
+  async delete(id: number) {
+    try {
+      const [productResult] = await databaseClient.execute<Result>(
+        `DELETE FROM product 
+         WHERE id = ?`,
+        [id],
+      );
+
+      if (productResult.affectedRows === 0) {
+        throw new Error("Produit non trouvé");
+      }
+
+      return productResult.affectedRows;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Erreur lors de la suppression");
+    }
+  }
+
   async addToTopProduct(productId: number) {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
 
-      const [products] = await connection.query<Rows>(
+      const [products] = await connection.execute<Rows>(
         `SELECT name, type, description, price, img_path FROM product 
 			   WHERE id = ?`,
         [productId],
@@ -150,8 +154,7 @@ class productsRepository {
         throw new Error("Produit non trouvé");
       }
 
-      // Ajouter le produit à la table top_products
-      const [result] = await connection.query<Result>(
+      const [result] = await connection.execute<Result>(
         `INSERT INTO top_product 
          (product_id) 
          VALUES (?)`,
@@ -168,15 +171,5 @@ class productsRepository {
     }
   }
 }
-// async update(products: products) {
-//   ...
-// }
-
-// The D of CRUD - Delete operation
-// TODO: Implement the delete operation to remove an products by its ID
-
-// async delete(id: number) {
-//   ...
-// }
 
 export default new productsRepository();

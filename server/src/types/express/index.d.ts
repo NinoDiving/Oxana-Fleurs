@@ -1,5 +1,3 @@
-import type { JwtPayload } from "jsonwebtoken";
-
 export type CustomJwtPayload = {
   id: string;
   isAdmin: number;
@@ -11,7 +9,7 @@ export type CustomJwtPayload = {
 declare global {
   namespace Express {
     export interface Request {
-      user?: CustomJwtPayload;
+      user: CustomJwtPayload;
     }
   }
 }

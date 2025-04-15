@@ -87,23 +87,26 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
 
     if (!user) {
       res.status(401).json({ message: "Email incorrect." });
+      return;
     }
 
-    const isPasswordMatch = await Auth.matchPassword(password, user?.password);
+    const isPasswordMatch = await Auth.matchPassword(password, user.password);
 
     if (!isPasswordMatch) {
       res.status(401).json({ message: "Mot de passe incorrect." });
+      return;
     }
 
     const token = Auth.generateToken({
-      id: user?.id,
-      lastname: user?.lastname,
-      firstname: user?.firstname,
-      email: user?.email,
-      isAdmin: user?.isAdmin,
+      id: user.id,
+      lastname: user.lastname,
+      firstname: user.firstname,
+      email: user.email,
+      isAdmin: user.isAdmin,
     });
+
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       maxAge: 3600000,
       sameSite: "lax",
@@ -112,11 +115,11 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
 
     res.status(200).json({
       message: "Connexion réussie",
-      id: user?.id,
-      lastname: user?.lastname,
-      firstname: user?.firstname,
-      email: user?.email,
-      isAdmin: user?.isAdmin,
+      id: user.id,
+      lastname: user.lastname,
+      firstname: user.firstname,
+      email: user.email,
+      isAdmin: user.isAdmin,
       token,
     });
   } catch (error) {

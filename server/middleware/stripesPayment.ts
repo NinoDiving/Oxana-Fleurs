@@ -35,14 +35,11 @@ const paymentActions = {
         return;
       }
 
-      const baseUrl = clientUrl.endsWith("/") ? clientUrl : `${clientUrl}/`;
-
       const lineItems = cart.map((item: CartItem) => ({
         price_data: {
           currency: "eur",
           product_data: {
             name: item.name,
-            images: [`${baseUrl}${item.img_path}`],
           },
           unit_amount: Math.round(Number(item.price) * 100),
         },

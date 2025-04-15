@@ -34,6 +34,7 @@ export default function useLogin() {
       const response = await fetch(`${import.meta.env.VITE_URL}login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email: email, password: password }),
       });
 
@@ -44,15 +45,6 @@ export default function useLogin() {
       if (response.ok) {
         window.location.reload();
       }
-
-      const data = await response.json();
-
-      Cookies.set("token", data.token, {
-        expires: 1,
-        path: "/",
-        secure: true,
-        sameSite: "lax",
-      });
     } catch (err) {
       setError("Mot de passe ou adresse e-mail incorrect");
     }

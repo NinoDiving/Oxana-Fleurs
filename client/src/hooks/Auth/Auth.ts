@@ -1,5 +1,3 @@
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 export type User = {
@@ -15,28 +13,18 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = Cookies.get("token");
-
-    if (token) {
-      try {
-        const decodedToken = jwtDecode<User>(token);
-
-        setUser({
-          id: decodedToken.id,
-          isAdmin: decodedToken.isAdmin,
-          lastname: decodedToken.lastname || "",
-          firstname: decodedToken.firstname || "",
-          email: decodedToken.email || "",
-        });
-      } catch (error) {
-        console.error("Erreur de décodage du token :", error);
+    fetch(`${import.meta.env.VITE_URL}user`, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data.user);
+        setLoading(false);
+      })
+      .catch(() => {
         setUser(null);
-      }
-    } else {
-      setUser(null);
-    }
-
-    setLoading(false);
+        setLoading(false);
+      });
   }, []);
 
   return { user, loading };

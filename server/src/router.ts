@@ -77,17 +77,22 @@ router.put(
   TopProductsActions.edit,
 );
 router.get("/api/user", verifyToken, adminAuthorization, userActions.browse);
-router.get("/api/user/:id", userActions.read);
+router.get("/user", verifyToken, (req, res) => {
+  const { firstname, lastname, email } = req.user;
+
+  res.status(200).json({
+    user: {
+      firstname,
+      lastname,
+      email,
+    },
+  });
+});
 router.post("/api/user", userActions.add);
 router.put("/api/user/:id", verifyToken, userActions.edit);
 router.get("/api/cart", verifyToken, adminAuthorization, purchaseAction.browse);
 router.post("/api/cart", verifyToken, purchaseAction.add);
-router.get(
-  "/api/cart/:id",
-  verifyToken,
-  adminAuthorization,
-  purchaseAction.read,
-);
+router.get("/api/cart/:id", verifyToken, purchaseAction.read);
 router.post(
   "/api/payment/create-checkout-session",
   paymentActions.createCheckoutSession,
